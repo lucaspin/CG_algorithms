@@ -22,10 +22,8 @@ class EdgesTable {
 public:
     
     EdgesTable(list<Vertex2d>);
-    bool isEmpty() const;
     void initScanLineAlgorithm();
     void removeEntryFromMap(int);
-    ETMap& getEdgesMap();
     
 private:
     ETMap edgesMap;

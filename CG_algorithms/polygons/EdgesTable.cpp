@@ -15,6 +15,13 @@
 
 using namespace std;
 
+/**
+ * Constructor for EdgesTable class.
+ * Initializes the map of edges according to the list of vertices passed as parameter.
+ * It assumes the list of coordinates is passed in the right order.
+ * @param verticesList {list<Vertex2d>} - the list of polygon vertices to draw
+ * @return {void}
+ */
 EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
     this->polygonVertices = verticesList;
     
@@ -37,12 +44,12 @@ EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
         }
         
         // if there's no variation in the y axis, we do not include the edge in the table.
-        // The algorithm will take care of x xis parallel lines
+        // The algorithm will take care of lines paralel to the x axis
         if (nextCoordinate->getY() == it->getY()) {
             continue;
         }
         
-        // Calculate the inverse of the slope (1/m)m considering zero division
+        // Calculate the inverse of the slope (1/m)
         slope = (nextCoordinate->getX() - it->getX()) / (nextCoordinate->getY() - it->getY());
         
         // Set all needed options to create a edge
@@ -61,29 +68,30 @@ EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
         // Create the edge
         PolygonEdge newEdge(minY, currentX, xForMinY, maxY, slope);
         
-        // Insert into the map
+        // Look for the key corresponding to the current y value
         ETMap::const_iterator mapIt = edgesMap.find(minY);
         
-        // if the specified key has not been found, it returns the end iterator
+        // if the specified key has not been found, we create a new entry in the map,
+        // otherwise, we just insert the new edge into the list referenced by the found key
         if (mapIt == edgesMap.end()) {
-            // Insert edge into a list
             listOfEdges.clear();
             listOfEdges.push_back(newEdge);
-            
-            // Insert list into the map
             edgesMap.insert(pair<int, list<PolygonEdge>>(minY, listOfEdges));
         } else {
-            // Just insert it into the list
             edgesMap[minY].push_back(newEdge);
         }
     }
     
 }
 
+/**
+ * Function that initializes the scan line algorithm itself.
+ * @return {void}
+ */
 void EdgesTable::initScanLineAlgorithm() {
     list<PolygonEdge> activeEdges;
     
-    // Get the smaller y from the list of coordinates
+    // Get the smaller y from the list of polygon vertices
     int scanLineY = min_element(this->polygonVertices.begin(), this->polygonVertices.end())->getY();
     
     // Move the list of key scanLineY to active edges and remove it from the edges table
@@ -94,7 +102,7 @@ void EdgesTable::initScanLineAlgorithm() {
     // Make sure it is sorted already
     activeEdges.sort();
     
-    while (!activeEdges.empty() || !this->isEmpty()) {
+    while (!activeEdges.empty() || !this->edgesMap.empty()) {
         
         // Draw the points
         glBegin(GL_POINTS);
@@ -127,6 +135,7 @@ void EdgesTable::initScanLineAlgorithm() {
             return edge.getMaxYCoordinate() == scanLineY;
         });
         
+        // Update the currentX values of the polygons in the active edges list
         for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
             it->updateCurrentX();
         }
@@ -134,9 +143,10 @@ void EdgesTable::initScanLineAlgorithm() {
         // Make sure the list is sorted after the updates
         activeEdges.sort();
         
-        // Move the list of key scanLineY to active edges and remove it from the edges table
+        // Look for an entry for the current y value
         auto foundIt = this->edgesMap.find(scanLineY);
         
+        // If we find, we move the found list from the edges table to the active edges list
         if (foundIt != this->edgesMap.end()) {
             activeEdges.merge(foundIt->second);
             activeEdges.sort();
@@ -145,14 +155,11 @@ void EdgesTable::initScanLineAlgorithm() {
     }
 }
 
-bool EdgesTable::isEmpty() const {
-    return this->edgesMap.empty();
-}
-
-ETMap& EdgesTable::getEdgesMap() {
-    return this->edgesMap;
-}
-
+/**
+ * Function that removes a key of the ET map.
+ * @param keyToRemove {int} - the key to remove from the map
+ * @return {void}
+ */
 void EdgesTable::removeEntryFromMap(int keyToRemove) {
     this->edgesMap.erase(keyToRemove);
 }
