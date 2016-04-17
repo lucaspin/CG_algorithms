@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		1B2BFFC71CC3F34A0037C1DE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFC61CC3F34A0037C1DE /* main.cpp */; };
+		1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */; };
+		1B2BFFD41CC3F4860037C1DE /* Vertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */; };
+		1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */; };
+		1B2BFFDB1CC3F6540037C1DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */; };
+		1B2BFFDD1CC3F6690037C1DE /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */; };
+		1B2BFFDF1CC3F6800037C1DE /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,17 @@
 /* Begin PBXFileReference section */
 		1B2BFFC31CC3F34A0037C1DE /* CG_algorithms */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CG_algorithms; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B2BFFC61CC3F34A0037C1DE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgesTable.cpp; sourceTree = "<group>"; };
+		1B2BFFD01CC3F4660037C1DE /* EdgesTable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EdgesTable.hpp; sourceTree = "<group>"; };
+		1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex2d.cpp; sourceTree = "<group>"; };
+		1B2BFFD31CC3F4860037C1DE /* Vertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex2d.hpp; sourceTree = "<group>"; };
+		1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonEdge.cpp; sourceTree = "<group>"; };
+		1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonEdge.hpp; sourceTree = "<group>"; };
+		1B2BFFD81CC3F5DB0037C1DE /* dda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dda.h; sourceTree = "<group>"; };
+		1B2BFFD91CC3F5EA0037C1DE /* bresenham.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bresenham.h; sourceTree = "<group>"; };
+		1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
+		1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B2BFFDF1CC3F6800037C1DE /* libglut.3.dylib in Frameworks */,
+				1B2BFFDD1CC3F6690037C1DE /* libGLEW.1.13.0.dylib in Frameworks */,
+				1B2BFFDB1CC3F6540037C1DE /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +61,9 @@
 		1B2BFFBA1CC3F34A0037C1DE = {
 			isa = PBXGroup;
 			children = (
+				1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */,
+				1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */,
+				1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */,
 				1B2BFFC51CC3F34A0037C1DE /* CG_algorithms */,
 				1B2BFFC41CC3F34A0037C1DE /* Products */,
 			);
@@ -57,9 +80,33 @@
 		1B2BFFC51CC3F34A0037C1DE /* CG_algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				1B2BFFCE1CC3F3660037C1DE /* polygons */,
+				1B2BFFCD1CC3F35F0037C1DE /* lines */,
 				1B2BFFC61CC3F34A0037C1DE /* main.cpp */,
 			);
 			path = CG_algorithms;
+			sourceTree = "<group>";
+		};
+		1B2BFFCD1CC3F35F0037C1DE /* lines */ = {
+			isa = PBXGroup;
+			children = (
+				1B2BFFD81CC3F5DB0037C1DE /* dda.h */,
+				1B2BFFD91CC3F5EA0037C1DE /* bresenham.h */,
+			);
+			path = lines;
+			sourceTree = "<group>";
+		};
+		1B2BFFCE1CC3F3660037C1DE /* polygons */ = {
+			isa = PBXGroup;
+			children = (
+				1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */,
+				1B2BFFD01CC3F4660037C1DE /* EdgesTable.hpp */,
+				1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */,
+				1B2BFFD31CC3F4860037C1DE /* Vertex2d.hpp */,
+				1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */,
+				1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */,
+			);
+			path = polygons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +165,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B2BFFD41CC3F4860037C1DE /* Vertex2d.cpp in Sources */,
+				1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */,
 				1B2BFFC71CC3F34A0037C1DE /* main.cpp in Sources */,
+				1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +257,14 @@
 		1B2BFFCB1CC3F34A0037C1DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/x11/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/x11/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -214,6 +272,14 @@
 		1B2BFFCC1CC3F34A0037C1DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/x11/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/x11/include,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -237,6 +303,7 @@
 				1B2BFFCC1CC3F34A0037C1DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
