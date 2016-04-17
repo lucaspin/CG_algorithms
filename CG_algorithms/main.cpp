@@ -59,9 +59,6 @@ void onDisplay() {
     // The list of points that will form the polygon
     list<Vertex2d> listOfCoordinates;
     
-    // The list of active edges
-    list<PolygonEdge> activeEdges;
-    
     // Create some points
     Vertex2d pointA(40, 60);
     Vertex2d pointB(140, 20);
@@ -80,67 +77,7 @@ void onDisplay() {
     
     // Create the edges table
     EdgesTable edgesTable(listOfCoordinates);
-    
-    // Get the smaller y from the list of coordinates
-    int scanLineY = min_element(listOfCoordinates.begin(), listOfCoordinates.end())->getY();
-    
-    // Move the list of key scanLineY to active edges and remove it from the edges table
-    list<PolygonEdge> initialActiveEdges = edgesTable.getEdgesMap().at(scanLineY);
-    activeEdges.merge(initialActiveEdges);
-    edgesTable.removeEntryFromMap(scanLineY);
-    
-    // Make sure it is sorted already
-    activeEdges.sort();
-    
-    while (!activeEdges.empty() || !edgesTable.isEmpty()) {
-        
-        // Draw the points
-        glBegin(GL_POINTS);
-        glColor3f(1.0, 1.0, 1.0);
-        
-        for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
-            // Get the next edge
-            auto nextPolygon = next(it);
-            
-            // Get the extremes x coordinates
-            int leftXValue = ceilf(it->getCurrentX());
-            int rightXValue = floorf(nextPolygon->getCurrentX());
-            
-            // Plot all the points between the two extremes
-            for (; leftXValue <= rightXValue; leftXValue++) {
-                glVertex3i(leftXValue, scanLineY, 0);
-            }
-            
-            // Make sure it goes on groups of two
-            it++;
-        }
-        
-        glEnd();
-        
-        // Increment the scan line y coordinate
-        scanLineY++;
-        
-        // Remove the edges from the list that had been reached its maximmum y
-        activeEdges.remove_if([scanLineY](const PolygonEdge edge){
-            return edge.getMaxYCoordinate() == scanLineY;
-        });
-        
-        for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
-            it->updateCurrentX();
-        }
-        
-        // Make sure the list is sorted after the updates
-        activeEdges.sort();
-        
-        // Move the list of key scanLineY to active edges and remove it from the edges table
-        auto foundIt = edgesTable.getEdgesMap().find(scanLineY);
-        
-        if (foundIt != edgesTable.getEdgesMap().end()) {
-            activeEdges.merge(foundIt->second);
-            activeEdges.sort();
-            edgesTable.removeEntryFromMap(scanLineY);
-        }
-    }
+    edgesTable.initScanLineAlgorithm();
     
     glFlush();
     glutSwapBuffers();
