@@ -21,6 +21,8 @@ public:
     void setX(float);
     void setY(float);
     bool operator<(const Vertex2d&) const;
+    float magnitude() const;
+    Vertex2d normalized() const;  //instantiate a new Vector2 of magnitude 1
     
 private:
     float x;

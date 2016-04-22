@@ -7,6 +7,7 @@
  */
 
 #include "Vertex2d.hpp"
+#include <math.h>           /* sqrt * /
 
 /**
  * @constructor
@@ -54,3 +55,12 @@ void Vertex2d::setX(float _x) {
 void Vertex2d::setY(float _y) {
     this->y = _y;
 }
+
+/**
+ * Returns the length of this vector (Read Only)
+ */
+float Vertex2d::magnitude() const{
+    float _magnitude = sqrt(x*x + y*y);
+    return _magnitude;
+}
+
