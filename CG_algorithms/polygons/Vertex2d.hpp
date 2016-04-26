@@ -11,6 +11,7 @@
 #define Vertex2d_hpp
 
 #include <list>
+#include <math.h>           /* sqrt */
 
 class Vertex2d {
 public:

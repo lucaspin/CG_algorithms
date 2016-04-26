@@ -7,7 +7,7 @@
  */
 
 #include "Vertex2d.hpp"
-#include <math.h>           /* sqrt * /
+
 
 /**
  * @constructor
