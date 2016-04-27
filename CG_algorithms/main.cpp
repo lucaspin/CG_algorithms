@@ -25,6 +25,7 @@
 void onDisplay();
 void centerOnScreen();
 void scanLineDemo();
+void matrix2dDemo();
 
 // Define the window position on screen
 int window_x;
@@ -61,14 +62,7 @@ void onDisplay() {
     
     scanLineDemo();
     
-    vector<float> m1Values = {1,1,1,2,2,2,3,3,3};
-    vector<float> m2Values = {2,2,3,3,4,4,1,1,1};
-    
-    Matrix2d m1(m1Values);
-    Matrix2d m2(m2Values);
-    Matrix2d m3 = m1 * m2;
-    
-    m3.printMatrix2d();
+    matrix2dDemo();
     
     glFlush();
     glutSwapBuffers();
@@ -100,6 +94,16 @@ void scanLineDemo() {
     edgesTable.initScanLineAlgorithm();
 }
 
+void matrix2dDemo() {
+    vector<float> m1Values = {1,1,1,2,2,2,3,3,3};
+    vector<float> m2Values = {2,2,3,3,4,4,1,1,1};
+    
+    Matrix2d m1(m1Values);
+    Matrix2d m2(m2Values);
+    Matrix2d m3 = m1 * m2;
+    
+    m3.printMatrix2d();
+}
 /**
  * this function is responsible to set the x and y coordinates
  * such as the window gets centered

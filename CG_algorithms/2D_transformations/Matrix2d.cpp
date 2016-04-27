@@ -113,27 +113,34 @@ Matrix2d Matrix2d::operator-(const Matrix2d& secondMatrix) {
  */
 Matrix2d Matrix2d::operator*(const Matrix2d& other) {
     // TODO: get these values instead of putting them hardcoded
-    int rhsOperandColumns = 2;
-    int rhsOperandRows = 2;
-    
     int lhsOperandRows = (int) other.getMatrix2d().size() - 1;
     int lhsOperandColumns = (int) other.getMatrix2d()[0].size() - 1;
+    int outoutRowsCounter = lhsOperandRows;
+    
+    int rhsOperandColumns = 2;
+    int rhsOperandRows = 2;
+    int outputColumnsCounter = rhsOperandColumns;
     
     if (rhsOperandRows != lhsOperandColumns) {
         throw invalid_argument("The number of columns must match the number of rows of the left hand operator");
     }
     
     Matrix2d outputMatrix;
-    float sum;
+    float sum = 0.0f;
     
-    // TODO: finish this
-    for (int i = lhsOperandRows; i >= 0; i--, lhsOperandColumns--) {
-        sum += 0.0f;
-        for (int j = rhsOperandColumns; j >= 0; j--) {
-            sum += this->getMatrix2d()[i][j] * other.getMatrix2d()[j][i];
+    for (int k = outoutRowsCounter; k>=0; k--) {
+        for (int i = lhsOperandRows; i >= 0; i--) {
+            for (int j = rhsOperandColumns; j >= 0; j--) {
+                sum += this->getMatrix2d()[outoutRowsCounter][j] * other.getMatrix2d()[j][i];
+            }
+            outputMatrix.matrix[outoutRowsCounter][outputColumnsCounter] = sum;
+            sum = 0.0f;
+            outputColumnsCounter--;
+            if (outputColumnsCounter < 0 ) {
+                outputColumnsCounter = rhsOperandColumns;
+                outoutRowsCounter--;
+            }
         }
-        outputMatrix.matrix[rhsOperandRows][lhsOperandColumns] = sum;
-        rhsOperandRows--;
     }
     
     return outputMatrix;
