@@ -16,12 +16,15 @@
 
 #include "polygons/EdgesTable.hpp"
 
+#include "2D_transformations/Matrix2d.hpp"
+
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 #define WINDOW_TITLE "Scan Line algorithm"
 
 void onDisplay();
 void centerOnScreen();
+void scanLineDemo();
 
 // Define the window position on screen
 int window_x;
@@ -56,6 +59,22 @@ void onDisplay() {
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
+    scanLineDemo();
+    
+    vector<float> m1Values = {1,1,1,2,2,2,3,3,3};
+        
+    Matrix2d m1(m1Values);
+    Matrix2d m2;
+    
+    Matrix2d m3 = m1 + m2;
+    m3.printMatrix2d();
+    
+    glFlush();
+    glutSwapBuffers();
+}
+
+void scanLineDemo() {
+    
     // The list of points that will form the polygon
     list<Vertex2d> listOfCoordinates;
     
@@ -78,9 +97,6 @@ void onDisplay() {
     // Create the edges table
     EdgesTable edgesTable(listOfCoordinates);
     edgesTable.initScanLineAlgorithm();
-    
-    glFlush();
-    glutSwapBuffers();
 }
 
 /**
