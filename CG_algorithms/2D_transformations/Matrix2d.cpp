@@ -8,6 +8,8 @@
 
 #include "Matrix2d.hpp"
 
+using namespace std;
+
 /**
  * @default constructor
  */
@@ -25,7 +27,11 @@ Matrix2d::Matrix2d( vector<float> initialValues) {
 }
 
 void Matrix2d::initializeValues( vector<float> initialValues){
+    vector<vector<float>> v(3, vector<float>(3));
+    
+    this->matrix = v;
     int initialValuesIndex = 0;
+    
     for (int row = 0; row < 3; row++) {
         for (int col = 0; col < 3; col++, initialValuesIndex++) {
             this->matrix[row][col] = initialValues[initialValuesIndex];
@@ -33,7 +39,7 @@ void Matrix2d::initializeValues( vector<float> initialValues){
     }
 }
 
-vector< vector<float> > Matrix2d::getMatrix2d() {
+vector< vector<float> > Matrix2d::getMatrix2d() const {
     return this->matrix;
 }
 
@@ -97,6 +103,39 @@ Matrix2d Matrix2d::operator-(const Matrix2d& secondMatrix) {
             outputMatrix.matrix[i][j] = this->matrix[i][j] - secondMatrix.matrix[i][j];
         }
     }
+    return outputMatrix;
+}
+
+/**
+ * Overload handler for the times operator
+ * @param other {Matrix2d&}
+ * @return {Matrix2d}
+ */
+Matrix2d Matrix2d::operator*(const Matrix2d& other) {
+    // TODO: get these values instead of putting them hardcoded
+    int rhsOperandColumns = 2;
+    int rhsOperandRows = 2;
+    
+    int lhsOperandRows = (int) other.getMatrix2d().size() - 1;
+    int lhsOperandColumns = (int) other.getMatrix2d()[0].size() - 1;
+    
+    if (rhsOperandRows != lhsOperandColumns) {
+        throw invalid_argument("The number of columns must match the number of rows of the left hand operator");
+    }
+    
+    Matrix2d outputMatrix;
+    float sum;
+    
+    // TODO: finish this
+    for (int i = lhsOperandRows; i >= 0; i--, lhsOperandColumns--) {
+        sum += 0.0f;
+        for (int j = rhsOperandColumns; j >= 0; j--) {
+            sum += this->getMatrix2d()[i][j] * other.getMatrix2d()[j][i];
+        }
+        outputMatrix.matrix[rhsOperandRows][lhsOperandColumns] = sum;
+        rhsOperandRows--;
+    }
+    
     return outputMatrix;
 }
 

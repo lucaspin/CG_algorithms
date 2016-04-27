@@ -62,11 +62,12 @@ void onDisplay() {
     scanLineDemo();
     
     vector<float> m1Values = {1,1,1,2,2,2,3,3,3};
-        
-    Matrix2d m1(m1Values);
-    Matrix2d m2;
+    vector<float> m2Values = {2,2,3,3,4,4,1,1,1};
     
-    Matrix2d m3 = m1 + m2;
+    Matrix2d m1(m1Values);
+    Matrix2d m2(m2Values);
+    Matrix2d m3 = m1 * m2;
+    
     m3.printMatrix2d();
     
     glFlush();
