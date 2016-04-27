@@ -19,6 +19,15 @@ Matrix2d::Matrix2d() {
 }
 
 /**
+ * instantiate an identity matrix 
+ * @return {Matrix2d}
+ */
+Matrix2d identity() {
+    vector<float> identityValues = {1,0,0,0,1,0,0,0,1};
+    return Matrix2d(identityValues);
+}
+
+/**
  * @constructor
  * @param {vector<float>}
  */

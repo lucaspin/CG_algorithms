@@ -15,7 +15,6 @@ Implement 2D transformations
 
 - [x] Create the Matrix2d class
 - [x] Create a constructor that accepts a vector of values to initialize the Matrix2d
-- [ ] object values (?)
 - [x] Implement functions to get and set the value of a Matrix2d
 - [x] Overload the * operator to multiply objects of class Matrix2d (dot product)
 - [ ] Create the TransformationMatrix class as a singleton

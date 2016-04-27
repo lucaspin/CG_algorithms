@@ -19,11 +19,13 @@ public:
     Matrix2d();
     Matrix2d( vector<float> );
     void initializeValues( vector<float> );
+    Matrix2d identity();
     
     // Getters and Setters
     vector< vector<float> > getMatrix2d() const;
     float getElement(int, int) const;
     void setElement(int, int, float);
+    
     void setMatrix2d( vector< vector<float> > );
     void printMatrix2d();  // Debug Purpose
     
