@@ -17,6 +17,7 @@
 #include "polygons/EdgesTable.hpp"
 
 #include "2D_transformations/Matrix2d.hpp"
+#include "2D_transformations/TransformationMatrix.hpp"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -26,6 +27,7 @@ void onDisplay();
 void centerOnScreen();
 void scanLineDemo();
 void matrix2dDemo();
+void transformationMatrixDemo();
 
 // Define the window position on screen
 int window_x;
@@ -61,8 +63,8 @@ void onDisplay() {
     glMatrixMode(GL_PROJECTION);
     
     scanLineDemo();
-    
     matrix2dDemo();
+    transformationMatrixDemo();
     
     glFlush();
     glutSwapBuffers();
@@ -104,6 +106,21 @@ void matrix2dDemo() {
     
     m3.printMatrix2d();
 }
+
+void transformationMatrixDemo() {
+    //Translate Matrix2d
+    cout << "Translation matrix for dx = 4 and dy = 1" << endl;
+    Matrix2d testTranslateMatrix;
+    testTranslateMatrix = TransformationMatrix::getInstance()->translate(4.0f, 1.0f);
+    testTranslateMatrix.printMatrix2d();
+    
+    //Rotate Matrix2d
+    cout << "Rotation matrix of 30 degress around (8,10)" << endl;
+    Matrix2d testRotateMatrix;
+    testRotateMatrix = TransformationMatrix::getInstance()->rotate(30.0f, 8.0f, 10.0f);
+    testRotateMatrix.printMatrix2d();
+}
+
 /**
  * this function is responsible to set the x and y coordinates
  * such as the window gets centered

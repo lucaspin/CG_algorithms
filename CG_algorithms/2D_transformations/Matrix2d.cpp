@@ -152,6 +152,8 @@ Matrix2d Matrix2d::operator*(const Matrix2d& other) {
         }
     }
     
+    
+    
     return outputMatrix;
 }
 

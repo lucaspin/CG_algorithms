@@ -17,9 +17,9 @@ Implement 2D transformations
 - [x] Create a constructor that accepts a vector of values to initialize the Matrix2d
 - [x] Implement functions to get and set the value of a Matrix2d
 - [x] Overload the * operator to multiply objects of class Matrix2d (dot product)
-- [ ] Create the TransformationMatrix class as a singleton
-- [ ] Implement function for translation
-- [ ] Implement function for rotation
+- [x] Create the TransformationMatrix class as a singleton
+- [x] Implement function for translation
+- [x] Implement function for rotation
 - [ ] Implement function for scaling
 - [ ] Implement function for mirroring
 
