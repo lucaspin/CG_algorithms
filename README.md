@@ -14,15 +14,20 @@ The current algorithms present here are:
 Implement 2D transformations
 
 - [x] Create the Matrix2d class
-- [x] Create a constructor that accepts a vector of values to initialize the Matrix2d
-- [x] Implement functions to get and set the value of a Matrix2d
-- [x] Overload the * operator to multiply objects of class Matrix2d (dot product)
+
+  - [x] Create a constructor that accepts a vector of values to initialize the Matrix2d
+  - [x] Implement functions to get and set the value of a Matrix2d
+  - [x] Overload the * operator to multiply objects of class Matrix2d (dot product)
+
 - [x] Create the TransformationMatrix class as a singleton
-- [x] Implement function for translation
-- [x] Implement function for rotation
-- [x] Implement function for scaling
-- [ ] Implement function for shearing
-- [ ] Implement function for mirroring
+
+  - [x] Implement function for translation
+  - [x] Implement function for rotation
+  - [x] Implement function for scaling
+  - [x] Implement function for shearing
+  - [ ] Implement function for mirroring
+
+- [x]Revamp Vertex2d class (point is now a 3x1 matrix)
 
 ## Authors
 

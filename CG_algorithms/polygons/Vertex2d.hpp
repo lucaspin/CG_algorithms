@@ -12,22 +12,25 @@
 
 #include <list>
 #include <math.h>           /* sqrt */
+#include <vector>
+using namespace std;
 
 class Vertex2d {
 public:
     
+    Vertex2d();
     Vertex2d(float, float);
+    void setVertex2d( vector<float> initialValues );
     float getX() const;
     float getY() const;
     void setX(float);
     void setY(float);
     bool operator<(const Vertex2d&) const;
     float magnitude() const;
-    Vertex2d normalized() const;  //instantiate a new Vector2 of magnitude 1
+    Vertex2d normalized() const;
     
 private:
-    float x;
-    float y;
+    vector<float> vertex;
 };
 
 #endif /* Vertex2d_hpp */
