@@ -20,7 +20,8 @@ Implement 2D transformations
 - [x] Create the TransformationMatrix class as a singleton
 - [x] Implement function for translation
 - [x] Implement function for rotation
-- [ ] Implement function for scaling
+- [x] Implement function for scaling
+- [ ] Implement function for shearing
 - [ ] Implement function for mirroring
 
 ## Authors

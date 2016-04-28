@@ -119,6 +119,12 @@ void transformationMatrixDemo() {
     Matrix2d testRotateMatrix;
     testRotateMatrix = TransformationMatrix::getInstance()->rotate(30.0f, 8.0f, 10.0f);
     testRotateMatrix.printMatrix2d();
+    
+    //Scale Matrix2d
+    cout << "Scale matrix of 40% around (6,8)" << endl;
+    Matrix2d testScaleMatrix;
+    testScaleMatrix = TransformationMatrix::getInstance()->scale(1.4f, 1.4f, 6.0f, 8.0f);
+    testScaleMatrix.printMatrix2d();
 }
 
 /**

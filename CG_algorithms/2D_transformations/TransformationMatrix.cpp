@@ -26,8 +26,8 @@ TransformationMatrix* TransformationMatrix::getInstance() {
  * @return {Matrix2d}
  */
 Matrix2d TransformationMatrix::translate(float dx, float dy) {
-    vector<float> translate = {1,0,dx,   0,1,dy,  0,0,1};
-    Matrix2d outputMatrix( translate );
+    vector<float> translateVector = {1,0,dx,   0,1,dy,  0,0,1};
+    Matrix2d outputMatrix( translateVector );
     return outputMatrix;
 }
 
@@ -60,5 +60,22 @@ Matrix2d TransformationMatrix::rotate(float rotationAngle, float xPivot, float y
     Matrix2d translateFromOriginMatrix = translate(xPivot, yPivot);
     
     Matrix2d outputMatrix = translateFromOriginMatrix * rotateMatrix * translateToOriginMatrix;
+    return outputMatrix;
+}
+
+/**
+ * Scale Matrix2d using a scaleFactor in x and y, around a coordinate
+ * @param xScaleFactor {float}, yScaleFactor {float}, x {float}, y {float}
+ * @return {Matrix2d}
+ */
+Matrix2d TransformationMatrix::scale(float xScaleFactor, float yScaleFactor, float x, float y) {
+    
+    vector<float> scaleVector = {xScaleFactor, 0,0,     0,yScaleFactor,0,       0,0,1};
+    
+    Matrix2d translateToOriginMatrix = translate(-x, -y);
+    Matrix2d rotateMatrix( scaleVector );
+    Matrix2d translateFromOriginMatrix = translate(x, y);
+    
+    Matrix2d outputMatrix = translateFromOriginMatrix * scaleVector * translateToOriginMatrix;
     return outputMatrix;
 }
