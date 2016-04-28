@@ -28,6 +28,7 @@ public:
     Matrix2d translate(float, float, float, float);
     Matrix2d rotate(float, float, float);
     Matrix2d scale(float, float, float, float);
+    Matrix2d shear(float, float, float, float);
     Matrix2d mirrorX();
     Matrix2d mirrorY();
 

@@ -79,3 +79,20 @@ Matrix2d TransformationMatrix::scale(float xScaleFactor, float yScaleFactor, flo
     Matrix2d outputMatrix = translateFromOriginMatrix * scaleVector * translateToOriginMatrix;
     return outputMatrix;
 }
+
+/**
+ * Shear Matrix2d using a shearFactor in x and y, around a coordinate
+ * @param xSshearFactor {float}, yShearFactor {float}, x {float}, y {float}
+ * @return {Matrix2d}
+ */
+Matrix2d TransformationMatrix::shear(float xShearFactor, float yShearFactor, float x, float y) {
+    
+    vector<float> shearVector = {1, xShearFactor,0,     yShearFactor,1,0,       0,0,1};
+    
+    Matrix2d translateToOriginMatrix = translate(-x, -y);
+    Matrix2d rotateMatrix( shearVector );
+    Matrix2d translateFromOriginMatrix = translate(x, y);
+    
+    Matrix2d outputMatrix = translateFromOriginMatrix * shearVector * translateToOriginMatrix;
+    return outputMatrix;
+}
