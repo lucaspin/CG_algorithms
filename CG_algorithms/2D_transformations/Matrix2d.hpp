@@ -11,22 +11,21 @@
 #include <stdio.h>
 #include <iostream>  /* std */
 #include <vector>
-using namespace std;
 
 class Matrix2d {
 public:
     
     Matrix2d();
-    Matrix2d( vector<float> );
-    void initializeValues( vector<float> );
+    Matrix2d( std::vector<float> );
+    void initializeValues( std::vector<float> );
     Matrix2d identity();
     
     // Getters and Setters
-    vector< vector<float> > getMatrix2d() const;
+    std::vector< std::vector<float> > getMatrix2d() const;
     float getElement(int, int) const;
     void setElement(int, int, float);
     
-    void setMatrix2d( vector< vector<float> > );
+    void setMatrix2d( std::vector< std::vector<float> > );
     void printMatrix2d();  // Debug Purpose
     
     // Overloads
@@ -36,7 +35,7 @@ public:
     
 private:
     // the matrix itself, always 3x3
-    vector<vector<float>> matrix;
+    std::vector< std::vector<float > > matrix;
 };
 
 #endif /* Matrix2d_hpp */

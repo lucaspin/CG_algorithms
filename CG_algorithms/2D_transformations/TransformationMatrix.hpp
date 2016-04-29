@@ -16,7 +16,6 @@
 #include <math.h>    /* sin and cos */
 
 #include "Matrix2d.hpp"
-using namespace std;
 
 class TransformationMatrix {
 

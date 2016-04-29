@@ -14,20 +14,18 @@
 #include <map>
 #include <list>
 
-using namespace std;
-
-typedef map<int, list<PolygonEdge>> ETMap;
+typedef std::map<int, std::list<PolygonEdge>> ETMap;
 
 class EdgesTable {
 public:
     
-    EdgesTable(list<Vertex2d>);
+    EdgesTable(std::list<Vertex2d>);
     void initScanLineAlgorithm();
     void removeEntryFromMap(int);
     
 private:
     ETMap edgesMap;
-    list<Vertex2d> polygonVertices;
+    std::list<Vertex2d> polygonVertices;
 };
 
 #endif /* EdgesTable_hpp */

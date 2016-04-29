@@ -23,6 +23,8 @@
 #define SCREEN_HEIGHT 480
 #define WINDOW_TITLE "Scan Line algorithm"
 
+using namespace std;
+
 void onDisplay();
 void centerOnScreen();
 void scanLineDemo();

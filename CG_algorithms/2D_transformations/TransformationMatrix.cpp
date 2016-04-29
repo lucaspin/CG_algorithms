@@ -8,6 +8,8 @@
 
 #include "TransformationMatrix.hpp"
 
+using namespace std;
+
 // Private
 
 // Global static pointer used to ensure a single instance of the class
