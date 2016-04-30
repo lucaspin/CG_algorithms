@@ -14,10 +14,16 @@
 
 class Line : public GeometricFigure {
 public:
-    Line();
-    // Line specific methods
+    Line(Vertex2d, Vertex2d);
+    Vertex2d getInitialPoint() const;
+    void setInitialPoint(Vertex2d);
+    Vertex2d getFinalPoint() const;
+    void setFinalPoint(Vertex2d);
+    static Line generateLineBresenham(Vertex2d, Vertex2d);
+    static Line generateLineDDA(Vertex2d, Vertex2d);
 private:
-    // Line specific properties
+    Vertex2d initialPoint;
+    Vertex2d finalPoint;
 };
 
 #endif /* Line_hpp */
