@@ -25,6 +25,7 @@ Vertex2d::Vertex2d() {
 Vertex2d::Vertex2d(float x, float y, float z) {
     this->setX(x);
     this->setY(y);
+    this->setZ(z);
 }
 
 /**

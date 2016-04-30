@@ -22,20 +22,16 @@ class TransformationMatrix {
 public:
     
     static TransformationMatrix* getInstance();
+    Matrix2d getTranslationMatrix(float, float);
+    Matrix2d getRotationMatrix(float, float, float);
+    Matrix2d getScaleMatrix(float, float, float, float);
+    Matrix2d getShearMatrix(float, float, float, float);
+    Matrix2d getXMirrorMatrix();
+    Matrix2d getYMirrorMatrix();
     
-    Matrix2d translate(float, float);
-    Matrix2d translate(float, float, float, float);
-    Matrix2d rotate(float, float, float);
-    Matrix2d scale(float, float, float, float);
-    Matrix2d shear(float, float, float, float);
-    Matrix2d mirrorX();
-    Matrix2d mirrorY();
-
 private:
-
     static TransformationMatrix* instance;
     TransformationMatrix() {};
-   
 };
 
 #endif /* TransformationMatrix_hpp */

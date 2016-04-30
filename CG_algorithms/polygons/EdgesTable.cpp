@@ -24,8 +24,6 @@ using namespace std;
  * @return {void}
  */
 EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
-    this->polygonVertices = verticesList;
-    
     list<Vertex2d>::const_iterator it;
     int maxY, xForMinY, minY;
     float slope, currentX;
@@ -83,76 +81,6 @@ EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
         }
     }
     
-}
-
-/**
- * Function that initializes the scan line algorithm itself.
- * @return {void}
- */
-Polygon EdgesTable::initScanLineAlgorithm() {
-    list<PolygonEdge> activeEdges;
-    Polygon polygon(this->polygonVertices);
-    Vertex2d pointToAdd;
-    
-    // Get the smaller y from the list of polygon vertices
-    int scanLineY = min_element(this->polygonVertices.begin(), this->polygonVertices.end())->getY();
-    
-    // Move the list of key scanLineY to active edges and remove it from the edges table
-    list<PolygonEdge> initialActiveEdges = this->edgesMap.at(scanLineY);
-    activeEdges.merge(initialActiveEdges);
-    this->removeEntryFromMap(scanLineY);
-    
-    // Make sure it is sorted already
-    activeEdges.sort();
-    
-    while (!activeEdges.empty() || !this->edgesMap.empty()) {
-        for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
-            // Get the next edge
-            auto nextPolygon = next(it);
-            
-            // Get the extremes x coordinates
-            int leftXValue = ceilf(it->getCurrentX());
-            int rightXValue = floorf(nextPolygon->getCurrentX());
-            
-            // Add all the points between the two extremes to the polygon
-            for (; leftXValue <= rightXValue; leftXValue++) {
-                pointToAdd.setX(leftXValue);
-                pointToAdd.setY(scanLineY);
-                polygon.addPoint(pointToAdd);
-            }
-            
-            // Make sure it goes on groups of two
-            it++;
-        }
-        
-        // Increment the scan line y coordinate
-        scanLineY++;
-        
-        // Remove the edges from the list that had been reached its maximmum y
-        activeEdges.remove_if([scanLineY](const PolygonEdge edge){
-            return edge.getMaxYCoordinate() == scanLineY;
-        });
-        
-        // Update the currentX values of the polygons in the active edges list
-        for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
-            it->updateCurrentX();
-        }
-        
-        // Make sure the list is sorted after the updates
-        activeEdges.sort();
-        
-        // Look for an entry for the current y value
-        auto foundIt = this->edgesMap.find(scanLineY);
-        
-        // If we find, we move the found list from the edges table to the active edges list
-        if (foundIt != this->edgesMap.end()) {
-            activeEdges.merge(foundIt->second);
-            activeEdges.sort();
-            this->removeEntryFromMap(scanLineY);
-        }
-    }
-    
-    return polygon;
 }
 
 /**

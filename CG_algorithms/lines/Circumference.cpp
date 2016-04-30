@@ -7,14 +7,19 @@
 
 #include "Circumference.hpp"
 #include <vector>
+#include "../2D_transformations/Matrix2d.hpp"
+#include "../2D_transformations/TransformationMatrix.hpp"
 #include "../common/Vertex2d.hpp"
 
 using namespace std;
 
 /**
  * Constructor for the class
+ * @param center {Vertex2d}
+ * @param radius {int}
  */
-Circumference::Circumference(int radius):GeometricFigure() {
+Circumference::Circumference(Vertex2d center, int radius):GeometricFigure() {
+    this->setCenter(center);
     this->setRadius(radius);
 }
 
@@ -69,7 +74,7 @@ Circumference::Circumference(int radius):GeometricFigure() {
  */
 Circumference Circumference::generateCircumferenceBresenham(Vertex2d center, int radius) {
     int currentX, currentY, d;
-    Circumference circumference(radius);
+    Circumference circumference(center, radius);
     Circumference *reference = &circumference;
     Vertex2d currentPoint;
     
@@ -105,7 +110,7 @@ Circumference Circumference::generateCircumferenceBresenham(Vertex2d center, int
  * @param radius {int}
  */
 void Circumference::setRadius(int newRadius) {
-    if (radius < 0) {
+    if (newRadius < 0) {
         throw invalid_argument("A circumference must have a positive radius");
     }
     
@@ -118,4 +123,37 @@ void Circumference::setRadius(int newRadius) {
  */
 int Circumference::getRadius() const {
     return this->radius;
+}
+
+/**
+ * Getter for the circumference's center
+ * @return {Vertex2d}
+ */
+Vertex2d Circumference::getCenter() const {
+    return this->center;
+}
+
+/**
+ * Setter for the circumference's center
+ * @param newCenter {Vertex2d}
+ */
+void Circumference::setCenter(Vertex2d newCenter) {
+    this->center = newCenter;
+}
+
+void Circumference::applyTransformationMatrix(Matrix2d transformationMatrix) {
+    // Generate a new center
+    Vertex2d newCenter = transformationMatrix * this->getCenter();
+    
+    // Generate a new circumference with the new center
+    Circumference newCirc = Circumference::generateCircumferenceBresenham(newCenter, this->getRadius());
+    
+    // Set the new points
+    this->setCenter(newCenter);
+    GeometricFigure::setPoints(newCirc.GeometricFigure::getPoints());
+}
+
+void Circumference::translate(float dx, float dy) {
+    Matrix2d translationMatrix = TransformationMatrix::getInstance()->getTranslationMatrix(dx, dy);
+    this->applyTransformationMatrix(translationMatrix);
 }

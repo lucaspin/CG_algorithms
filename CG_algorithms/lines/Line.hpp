@@ -11,6 +11,7 @@
 #include <vector>
 #include "../common/Vertex2d.hpp"
 #include "../common/GeometricFigure.hpp"
+#include "../2D_transformations/Matrix2d.hpp"
 
 class Line : public GeometricFigure {
 public:
@@ -21,7 +22,10 @@ public:
     void setFinalPoint(Vertex2d);
     static Line generateLineBresenham(Vertex2d, Vertex2d);
     static Line generateLineDDA(Vertex2d, Vertex2d);
+    void translate(float, float);
 private:
+    void applyTransformationMatrix(Matrix2d transformationMatrix);
+    
     Vertex2d initialPoint;
     Vertex2d finalPoint;
 };

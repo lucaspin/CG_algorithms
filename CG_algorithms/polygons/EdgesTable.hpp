@@ -19,14 +19,9 @@ typedef std::map<int, std::list<PolygonEdge>> ETMap;
 
 class EdgesTable {
 public:
-    
     EdgesTable(std::list<Vertex2d>);
-    Polygon initScanLineAlgorithm();
     void removeEntryFromMap(int);
-    
-private:
     ETMap edgesMap;
-    std::list<Vertex2d> polygonVertices;
 };
 
 #endif /* EdgesTable_hpp */

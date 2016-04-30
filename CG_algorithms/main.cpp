@@ -14,8 +14,6 @@
 #include "OpenGL/glu.h"
 #include "GL/freeglut.h"
 
-#include "lines/dda.h"
-#include "lines/bresenham.h"
 #include "polygons/EdgesTable.hpp"
 #include "2D_transformations/Matrix2d.hpp"
 #include "2D_transformations/TransformationMatrix.hpp"
@@ -85,17 +83,17 @@ void onDisplay() {
     glutSwapBuffers();
 }
 
-Polygon generatePolygon() {
+void translatePolygonDemo() {
     // The list of points that will form the polygon
     list<Vertex2d> listOfCoordinates;
     
     // Create some points
-    Vertex2d pointA(40, 60, 0);
-    Vertex2d pointB(140, 20, 0);
-    Vertex2d pointC(260, 100, 0);
-    Vertex2d pointD(260, 200, 0);
-    Vertex2d pointE(140, 140, 0);
-    Vertex2d pointF(40, 180, 0);
+    Vertex2d pointA(40, 60, 1.0f);
+    Vertex2d pointB(140, 20, 1.0f);
+    Vertex2d pointC(260, 100, 1.0f);
+    Vertex2d pointD(260, 200, 1.0f);
+    Vertex2d pointE(140, 140, 1.0f);
+    Vertex2d pointF(40, 180, 1.0f);
     
     // Create the list of points
     listOfCoordinates.push_back(pointA);
@@ -105,23 +103,33 @@ Polygon generatePolygon() {
     listOfCoordinates.push_back(pointE);
     listOfCoordinates.push_back(pointF);
     
-    // Create the edges table
-    EdgesTable edgesTable(listOfCoordinates);
-    return edgesTable.initScanLineAlgorithm();
+    Polygon polygon = Polygon::generatePolygon(listOfCoordinates);
+    printGeometricFigure(polygon);
+    polygon.translate(200, 200);
+    printGeometricFigure(polygon);
+}
+
+void translateCircumferenceDemo() {
+    Vertex2d center(100, 100, 1.0f);
+    Circumference circ = Circumference::generateCircumferenceBresenham(center, 50);
+    printGeometricFigure(circ);
+    circ.translate(200, 200);
+    printGeometricFigure(circ);
+}
+
+void translateLineDemo() {
+    Vertex2d initialPoint(100, 100, 1);
+    Vertex2d finalPoint(300, 300, 1);
+    Line line = Line::generateLineDDA(initialPoint, finalPoint);
+    printGeometricFigure(line);
+    line.translate(200.0f, 200.0f);
+    printGeometricFigure(line);
 }
 
 void transformationDemo() {
-    // Create a polygon and print it
-    Polygon polygon = generatePolygon();
-    printGeometricFigure(polygon);
-    
-    // Get the transformation matrix for a variation of 200 in both axis
-    Matrix2d testTranslateMatrix;
-    testTranslateMatrix = TransformationMatrix::getInstance()->translate(200.0f, 200.0f);
-    
-    // Get the translated polygon and print it
-    GeometricFigure translatedPolygon = testTranslateMatrix * polygon;
-    printGeometricFigure(translatedPolygon);
+//    translateLineDemo();
+    translatePolygonDemo();
+//    translateCircumferenceDemo();
 }
 
 /**

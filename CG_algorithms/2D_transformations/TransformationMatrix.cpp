@@ -27,22 +27,12 @@ TransformationMatrix* TransformationMatrix::getInstance() {
  * @param dx {float}, dy {float}
  * @return {Matrix2d}
  */
-Matrix2d TransformationMatrix::translate(float dx, float dy) {
-    vector<float> translateVector = {1,0,dx,   0,1,dy,  0,0,1};
+Matrix2d TransformationMatrix::getTranslationMatrix(float dx, float dy) {
+    vector<float> translateVector = {1,  0,  dx,
+                                     0,  1,  dy,
+                                     0,  0,  1};
     Matrix2d outputMatrix( translateVector );
     return outputMatrix;
-}
-
-/**
- * Translate using initial and final coordinates
- * @param xInitial {float}, yInitial {float}, xFinal {float}, yFinal {float}
- * @return {Matrix2d}
- */
-Matrix2d TransformationMatrix::translate(float xInitial, float yInitial,
-                                         float xFinal, float yFinal) {
-    float dx = xFinal - xInitial;
-    float dy = yFinal - yInitial;
-    return translate(dx,dy);
 }
 
 /**
@@ -50,18 +40,20 @@ Matrix2d TransformationMatrix::translate(float xInitial, float yInitial,
  * @param rotationAngle {float} - in degrees (CounterClockWise), xPivot {float}, yPivot {float}
  * @return {Matrix2d}
  */
-Matrix2d TransformationMatrix::rotate(float rotationAngle, float xPivot, float yPivot) {
+Matrix2d TransformationMatrix::getRotationMatrix(float rotationAngle, float xPivot, float yPivot) {
     
     float cosine = cos(rotationAngle*PI/180);
     float sine = sin(rotationAngle*PI/180);
-    vector<float> rotateVector = { cosine, -sine ,0,
-                                   sine,   cosine,0,
-                                    0  ,0        ,1};
-    Matrix2d translateToOriginMatrix = translate(-xPivot, -yPivot);
-    Matrix2d rotateMatrix( rotateVector );
-    Matrix2d translateFromOriginMatrix = translate(xPivot, yPivot);
     
+    vector<float> rotateVector = {cosine, -sine ,  0,
+                                  sine,    cosine, 0,
+                                  0,       0,      1};
+    
+    Matrix2d translateToOriginMatrix = getTranslationMatrix(-xPivot, -yPivot);
+    Matrix2d rotateMatrix(rotateVector);
+    Matrix2d translateFromOriginMatrix = getTranslationMatrix(xPivot, yPivot);
     Matrix2d outputMatrix = translateFromOriginMatrix * rotateMatrix * translateToOriginMatrix;
+    
     return outputMatrix;
 }
 
@@ -70,15 +62,16 @@ Matrix2d TransformationMatrix::rotate(float rotationAngle, float xPivot, float y
  * @param xScaleFactor {float}, yScaleFactor {float}, x {float}, y {float}
  * @return {Matrix2d}
  */
-Matrix2d TransformationMatrix::scale(float xScaleFactor, float yScaleFactor, float x, float y) {
+Matrix2d TransformationMatrix::getScaleMatrix(float xScaleFactor, float yScaleFactor, float x, float y) {
+    vector<float> scaleVector = {xScaleFactor, 0,            0,
+                                 0,            yScaleFactor, 0,
+                                 0,            0,            1};
     
-    vector<float> scaleVector = {xScaleFactor, 0,0,     0,yScaleFactor,0,       0,0,1};
-    
-    Matrix2d translateToOriginMatrix = translate(-x, -y);
-    Matrix2d rotateMatrix( scaleVector );
-    Matrix2d translateFromOriginMatrix = translate(x, y);
-    
+    Matrix2d translateToOriginMatrix = getTranslationMatrix(-x, -y);
+    Matrix2d rotateMatrix(scaleVector);
+    Matrix2d translateFromOriginMatrix = getTranslationMatrix(x, y);
     Matrix2d outputMatrix = translateFromOriginMatrix * scaleVector * translateToOriginMatrix;
+    
     return outputMatrix;
 }
 
@@ -87,14 +80,16 @@ Matrix2d TransformationMatrix::scale(float xScaleFactor, float yScaleFactor, flo
  * @param xSshearFactor {float}, yShearFactor {float}, x {float}, y {float}
  * @return {Matrix2d}
  */
-Matrix2d TransformationMatrix::shear(float xShearFactor, float yShearFactor, float x, float y) {
+Matrix2d TransformationMatrix::getShearMatrix(float xShearFactor, float yShearFactor, float x, float y) {
     
-    vector<float> shearVector = {1, xShearFactor,0,     yShearFactor,1,0,       0,0,1};
+    vector<float> shearVector = {1,            xShearFactor, 0,
+                                 yShearFactor, 1,            0,
+                                 0,            0,            1};
     
-    Matrix2d translateToOriginMatrix = translate(-x, -y);
-    Matrix2d rotateMatrix( shearVector );
-    Matrix2d translateFromOriginMatrix = translate(x, y);
-    
+    Matrix2d translateToOriginMatrix = getTranslationMatrix(-x, -y);
+    Matrix2d rotateMatrix(shearVector);
+    Matrix2d translateFromOriginMatrix = getTranslationMatrix(x, y);
     Matrix2d outputMatrix = translateFromOriginMatrix * shearVector * translateToOriginMatrix;
+    
     return outputMatrix;
 }

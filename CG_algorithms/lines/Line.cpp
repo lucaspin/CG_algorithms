@@ -148,3 +148,22 @@ void Line::setFinalPoint(Vertex2d newFinalPoint) {
 void Line::setInitialPoint(Vertex2d newInitialPoint) {
     this->initialPoint = newInitialPoint;
 }
+
+void Line::applyTransformationMatrix(Matrix2d transformationMatrix) {
+    // Cslculate the new points
+    Vertex2d newInitialPoint = transformationMatrix * this->getInitialPoint();
+    Vertex2d newFinalPoint = transformationMatrix * this->getFinalPoint();
+    
+    // Generate a new line
+    Line newLine = generateLineBresenham(newInitialPoint, newFinalPoint);
+    
+    // Set the new points
+    this->setInitialPoint(newInitialPoint);
+    this->setFinalPoint(newFinalPoint);
+    GeometricFigure::setPoints(newLine.GeometricFigure::getPoints());
+}
+
+void Line::translate(float dx, float dy) {
+    Matrix2d translationMatrix = TransformationMatrix::getInstance()->getTranslationMatrix(dx, dy);
+    this->applyTransformationMatrix(translationMatrix);
+}

@@ -16,7 +16,7 @@ public:
     std::vector<Vertex2d> getPoints() const;
     void setPoints(std::vector<Vertex2d>);
     void addPoint(Vertex2d);
-private:
+protected:
     std::vector<Vertex2d> points;
 };
 

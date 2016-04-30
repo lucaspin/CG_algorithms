@@ -41,8 +41,6 @@
 		1B2BFFD01CC3F4660037C1DE /* EdgesTable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EdgesTable.hpp; sourceTree = "<group>"; };
 		1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonEdge.cpp; sourceTree = "<group>"; };
 		1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonEdge.hpp; sourceTree = "<group>"; };
-		1B2BFFD81CC3F5DB0037C1DE /* dda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dda.h; sourceTree = "<group>"; };
-		1B2BFFD91CC3F5EA0037C1DE /* bresenham.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bresenham.h; sourceTree = "<group>"; };
 		1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
@@ -110,8 +108,6 @@
 		1B2BFFCD1CC3F35F0037C1DE /* lines */ = {
 			isa = PBXGroup;
 			children = (
-				1B2BFFD81CC3F5DB0037C1DE /* dda.h */,
-				1B2BFFD91CC3F5EA0037C1DE /* bresenham.h */,
 				1BD97F091CD3D08D00BECC5D /* Line.cpp */,
 				1BD97F0A1CD3D08D00BECC5D /* Line.hpp */,
 				1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */,
