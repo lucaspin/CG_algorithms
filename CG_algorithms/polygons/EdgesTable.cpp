@@ -7,8 +7,9 @@
  */
 
 #include "EdgesTable.hpp"
-#include "Vertex2d.hpp"
+#include "../common/Vertex2d.hpp"
 #include "PolygonEdge.hpp"
+#include "Polygon.hpp"
 #include <list>
 #include <math.h>
 #include "OpenGL/gl.h"
@@ -88,8 +89,10 @@ EdgesTable::EdgesTable(list<Vertex2d> verticesList) {
  * Function that initializes the scan line algorithm itself.
  * @return {void}
  */
-void EdgesTable::initScanLineAlgorithm() {
+Polygon EdgesTable::initScanLineAlgorithm() {
     list<PolygonEdge> activeEdges;
+    Polygon polygon(this->polygonVertices);
+    Vertex2d pointToAdd;
     
     // Get the smaller y from the list of polygon vertices
     int scanLineY = min_element(this->polygonVertices.begin(), this->polygonVertices.end())->getY();
@@ -103,11 +106,6 @@ void EdgesTable::initScanLineAlgorithm() {
     activeEdges.sort();
     
     while (!activeEdges.empty() || !this->edgesMap.empty()) {
-        
-        // Draw the points
-        glBegin(GL_POINTS);
-        glColor3f(1.0, 1.0, 1.0);
-        
         for (auto it = activeEdges.begin(); it != activeEdges.end(); it++) {
             // Get the next edge
             auto nextPolygon = next(it);
@@ -116,16 +114,16 @@ void EdgesTable::initScanLineAlgorithm() {
             int leftXValue = ceilf(it->getCurrentX());
             int rightXValue = floorf(nextPolygon->getCurrentX());
             
-            // Plot all the points between the two extremes
+            // Add all the points between the two extremes to the polygon
             for (; leftXValue <= rightXValue; leftXValue++) {
-                glVertex3i(leftXValue, scanLineY, 0);
+                pointToAdd.setX(leftXValue);
+                pointToAdd.setY(scanLineY);
+                polygon.addPoint(pointToAdd);
             }
             
             // Make sure it goes on groups of two
             it++;
         }
-        
-        glEnd();
         
         // Increment the scan line y coordinate
         scanLineY++;
@@ -153,6 +151,8 @@ void EdgesTable::initScanLineAlgorithm() {
             this->removeEntryFromMap(scanLineY);
         }
     }
+    
+    return polygon;
 }
 
 /**

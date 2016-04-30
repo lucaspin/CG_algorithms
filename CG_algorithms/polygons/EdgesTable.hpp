@@ -10,7 +10,8 @@
 #define EdgesTable_hpp
 
 #include "PolygonEdge.hpp"
-#include "Vertex2d.hpp"
+#include "Polygon.hpp"
+#include "../common/Vertex2d.hpp"
 #include <map>
 #include <list>
 
@@ -20,7 +21,7 @@ class EdgesTable {
 public:
     
     EdgesTable(std::list<Vertex2d>);
-    void initScanLineAlgorithm();
+    Polygon initScanLineAlgorithm();
     void removeEntryFromMap(int);
     
 private:

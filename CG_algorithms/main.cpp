@@ -14,10 +14,14 @@
 #include "OpenGL/glu.h"
 #include "GL/freeglut.h"
 
+#include "lines/dda.h"
+#include "lines/bresenham.h"
 #include "polygons/EdgesTable.hpp"
-
 #include "2D_transformations/Matrix2d.hpp"
 #include "2D_transformations/TransformationMatrix.hpp"
+#include "polygons/Polygon.hpp"
+#include "lines/Line.hpp"
+#include "lines/Circumference.hpp"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -27,7 +31,8 @@ using namespace std;
 
 void onDisplay();
 void centerOnScreen();
-void scanLineDemo();
+Polygon generatePolygon();
+void printGeometricFigure(GeometricFigure figure);
 void matrix2dDemo();
 void transformationMatrixDemo();
 
@@ -58,32 +63,40 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+void printGeometricFigure(GeometricFigure figure) {
+    glBegin(GL_POINTS);
+    glColor3f(1.0, 1.0, 1.0);
+    
+    for (Vertex2d point : figure.getPoints()) {
+        glVertex3i(point.getX(), point.getY(), point.getZ());
+    }
+    
+    glEnd();
+}
+
 void onDisplay() {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
-    scanLineDemo();
-    matrix2dDemo();
-    transformationMatrixDemo();
-    
+    // TODO: apply some kind of transformation
+
     glFlush();
     glutSwapBuffers();
 }
 
-void scanLineDemo() {
-    
+Polygon generatePolygon() {
     // The list of points that will form the polygon
     list<Vertex2d> listOfCoordinates;
     
     // Create some points
-    Vertex2d pointA(40, 60);
-    Vertex2d pointB(140, 20);
-    Vertex2d pointC(260, 100);
-    Vertex2d pointD(260, 200);
-    Vertex2d pointE(140, 140);
-    Vertex2d pointF(40, 180);
+    Vertex2d pointA(40, 60, 0);
+    Vertex2d pointB(140, 20, 0);
+    Vertex2d pointC(260, 100, 0);
+    Vertex2d pointD(260, 200, 0);
+    Vertex2d pointE(140, 140, 0);
+    Vertex2d pointF(40, 180, 0);
     
     // Create the list of points
     listOfCoordinates.push_back(pointA);
@@ -95,7 +108,7 @@ void scanLineDemo() {
     
     // Create the edges table
     EdgesTable edgesTable(listOfCoordinates);
-    edgesTable.initScanLineAlgorithm();
+    return edgesTable.initScanLineAlgorithm();
 }
 
 void matrix2dDemo() {

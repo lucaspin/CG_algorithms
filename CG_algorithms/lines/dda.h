@@ -8,23 +8,27 @@
 #ifndef dda_h
 #define dda_h
 
-void displayLineDDA(int initialX, int initialY, int finalX, int finalY);
+#include "Line.hpp"
+#include "../common/Vertex2d.hpp"
+
+Line generateLineDDA(Vertex2d initialPoint, Vertex2d lastPoint);
 
 /**
  * Display a line on the screen, using the DDA algorithm
- * @param initialX - the x coordinate of the first point
- * @param initialY - the y coordinate of the first point
- * @param finalX - the x coordinate of the second point
- * @param finalY - the y coordinate of the second point
+ * @param initialPoint - the initial coordinate of the line
+ * @param lastPoint - the last coordinate of the line
  */
-void displayLineDDA(int initialX, int initialY, int finalX, int finalY) {
+Line generateLineDDA(Vertex2d initialPoint, Vertex2d lastPoint) {
     int xVariation, yVariation;
     float xIncrement, yIncrement;
     int numOfIterations, count;
     float currentX, currentY;
     
-    xVariation = finalX - initialX;
-    yVariation = finalY - initialY;
+    Line line;
+    Vertex2d pointToAdd;
+    
+    xVariation = lastPoint.getX() - initialPoint.getX();
+    yVariation = lastPoint.getY() - initialPoint.getY();
     
     if (abs(xVariation) > abs(yVariation)) {
         numOfIterations = abs(xVariation);
@@ -35,21 +39,23 @@ void displayLineDDA(int initialX, int initialY, int finalX, int finalY) {
     xIncrement = (float) xVariation / numOfIterations;
     yIncrement = (float) yVariation / numOfIterations;
     
-    currentX = initialX;
-    currentY = initialY;
-    
-    glBegin(GL_POINTS);
-    glColor3f(255, 255, 255);
-    glVertex3i(round(currentX), round(currentY), 0);
-    glEnd();
-    
-    glBegin(GL_POINTS);
+    currentX = initialPoint.getX();
+    currentY = initialPoint.getY();
+
+    pointToAdd.setX(round(currentX));
+    pointToAdd.setY(round(currentY));
+    line.addPoint(pointToAdd);
+
     for (count = 1; count < numOfIterations; count++) {
         currentX += xIncrement;
         currentY += yIncrement;
-        glVertex3i(round(currentX), round(currentY), 0);
+        
+        pointToAdd.setX(round(currentX));
+        pointToAdd.setY(round(currentY));
+        line.addPoint(pointToAdd);
     }
-    glEnd();
+    
+    return line;
 }
 
 #endif /* dda_h */

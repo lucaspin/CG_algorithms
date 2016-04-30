@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		1B2BFFC71CC3F34A0037C1DE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFC61CC3F34A0037C1DE /* main.cpp */; };
 		1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */; };
-		1B2BFFD41CC3F4860037C1DE /* Vertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */; };
 		1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */; };
 		1B2BFFDB1CC3F6540037C1DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */; };
 		1B2BFFDD1CC3F6690037C1DE /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */; };
 		1B2BFFDF1CC3F6800037C1DE /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */; };
+		1B5C3B6B1CD4538E0044A700 /* Vertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C3B691CD4538E0044A700 /* Vertex2d.cpp */; };
+		1B5C3B6E1CD456820044A700 /* GeometricFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */; };
 		1B7378E41CCAE45F00EF9890 /* Matrix2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B7378E21CCAE45F00EF9890 /* Matrix2d.cpp */; };
 		1B7378E71CCAE4A400EF9890 /* TransformationMatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B7378E51CCAE4A400EF9890 /* TransformationMatrix.cpp */; };
+		1BD97F081CD3CD7D00BECC5D /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F061CD3CD7D00BECC5D /* Polygon.cpp */; };
+		1BD97F0B1CD3D08D00BECC5D /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F091CD3D08D00BECC5D /* Line.cpp */; };
+		1BD97F0E1CD3DC8C00BECC5D /* Circumference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,8 +39,6 @@
 		1B2BFFC61CC3F34A0037C1DE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EdgesTable.cpp; sourceTree = "<group>"; };
 		1B2BFFD01CC3F4660037C1DE /* EdgesTable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EdgesTable.hpp; sourceTree = "<group>"; };
-		1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex2d.cpp; sourceTree = "<group>"; };
-		1B2BFFD31CC3F4860037C1DE /* Vertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex2d.hpp; sourceTree = "<group>"; };
 		1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonEdge.cpp; sourceTree = "<group>"; };
 		1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonEdge.hpp; sourceTree = "<group>"; };
 		1B2BFFD81CC3F5DB0037C1DE /* dda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dda.h; sourceTree = "<group>"; };
@@ -44,10 +46,20 @@
 		1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
 		1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
+		1B5C3B691CD4538E0044A700 /* Vertex2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex2d.cpp; sourceTree = "<group>"; };
+		1B5C3B6A1CD4538E0044A700 /* Vertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex2d.hpp; sourceTree = "<group>"; };
+		1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometricFigure.cpp; sourceTree = "<group>"; };
+		1B5C3B6D1CD456820044A700 /* GeometricFigure.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GeometricFigure.hpp; sourceTree = "<group>"; };
 		1B7378E21CCAE45F00EF9890 /* Matrix2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix2d.cpp; sourceTree = "<group>"; };
 		1B7378E31CCAE45F00EF9890 /* Matrix2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix2d.hpp; sourceTree = "<group>"; };
 		1B7378E51CCAE4A400EF9890 /* TransformationMatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformationMatrix.cpp; sourceTree = "<group>"; };
 		1B7378E61CCAE4A400EF9890 /* TransformationMatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransformationMatrix.hpp; sourceTree = "<group>"; };
+		1BD97F061CD3CD7D00BECC5D /* Polygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Polygon.cpp; sourceTree = "<group>"; };
+		1BD97F071CD3CD7D00BECC5D /* Polygon.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Polygon.hpp; sourceTree = "<group>"; };
+		1BD97F091CD3D08D00BECC5D /* Line.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Line.cpp; sourceTree = "<group>"; };
+		1BD97F0A1CD3D08D00BECC5D /* Line.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Line.hpp; sourceTree = "<group>"; };
+		1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circumference.cpp; sourceTree = "<group>"; };
+		1BD97F0D1CD3DC8C00BECC5D /* Circumference.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circumference.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +98,7 @@
 		1B2BFFC51CC3F34A0037C1DE /* CG_algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				1B5C3B681CD4534D0044A700 /* common */,
 				1B7378E11CCAE42400EF9890 /* 2D_transformations */,
 				1B2BFFCE1CC3F3660037C1DE /* polygons */,
 				1B2BFFCD1CC3F35F0037C1DE /* lines */,
@@ -99,6 +112,10 @@
 			children = (
 				1B2BFFD81CC3F5DB0037C1DE /* dda.h */,
 				1B2BFFD91CC3F5EA0037C1DE /* bresenham.h */,
+				1BD97F091CD3D08D00BECC5D /* Line.cpp */,
+				1BD97F0A1CD3D08D00BECC5D /* Line.hpp */,
+				1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */,
+				1BD97F0D1CD3DC8C00BECC5D /* Circumference.hpp */,
 			);
 			path = lines;
 			sourceTree = "<group>";
@@ -108,12 +125,23 @@
 			children = (
 				1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */,
 				1B2BFFD01CC3F4660037C1DE /* EdgesTable.hpp */,
-				1B2BFFD21CC3F4860037C1DE /* Vertex2d.cpp */,
-				1B2BFFD31CC3F4860037C1DE /* Vertex2d.hpp */,
 				1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */,
 				1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */,
+				1BD97F061CD3CD7D00BECC5D /* Polygon.cpp */,
+				1BD97F071CD3CD7D00BECC5D /* Polygon.hpp */,
 			);
 			path = polygons;
+			sourceTree = "<group>";
+		};
+		1B5C3B681CD4534D0044A700 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				1B5C3B691CD4538E0044A700 /* Vertex2d.cpp */,
+				1B5C3B6A1CD4538E0044A700 /* Vertex2d.hpp */,
+				1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */,
+				1B5C3B6D1CD456820044A700 /* GeometricFigure.hpp */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		1B7378E11CCAE42400EF9890 /* 2D_transformations */ = {
@@ -183,12 +211,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B2BFFD41CC3F4860037C1DE /* Vertex2d.cpp in Sources */,
+				1BD97F0B1CD3D08D00BECC5D /* Line.cpp in Sources */,
+				1BD97F081CD3CD7D00BECC5D /* Polygon.cpp in Sources */,
 				1B7378E71CCAE4A400EF9890 /* TransformationMatrix.cpp in Sources */,
+				1BD97F0E1CD3DC8C00BECC5D /* Circumference.cpp in Sources */,
 				1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */,
+				1B5C3B6E1CD456820044A700 /* GeometricFigure.cpp in Sources */,
 				1B7378E41CCAE45F00EF9890 /* Matrix2d.cpp in Sources */,
 				1B2BFFC71CC3F34A0037C1DE /* main.cpp in Sources */,
 				1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */,
+				1B5C3B6B1CD4538E0044A700 /* Vertex2d.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

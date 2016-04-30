@@ -8,44 +8,45 @@
 #ifndef bresenham_h
 #define bresenham_h
 
-void displayLineBresenham(int initialX, int initialY, int finalX, int finalY);
-void displayCircumferenceBresenham(int xCenter, int yCenter, int radius);
-void printCircumferencePoints(int xCenter, int yCenter, int x, int y);
+#include "../common/Vertex2d.hpp"
+#include "Line.hpp"
+#include "Circumference.hpp"
+
+Line generateLineBresenham(Vertex2d initialPoint, Vertex2d lastPoint);
+Circumference generateCircumferenceBresenham(Vertex2d center, int radius);
+void generateCircumferencePoints(Circumference *circumference, Vertex2d center, Vertex2d currentPoint);
 
 /**
- * Display a line on the screen, using the Bresenham algorithm
- * @param initialX - the x coordinate of the first point
- * @param initialY - the y coordinate of the first point
- * @param finalX - the x coordinate of the second point
- * @param finalY - the y coordinate of the second point
+ * Generate a line, using the Bresenham algorithm
+ * @param initialPoint {Vertex2d} - the initial coordinate of the line
+ * @param lastPoint {Vertex2d} - the last coordinate of the line
  */
-void displayLineBresenham(int initialX, int initialY, int finalX, int finalY) {
+Line generateLineBresenham(Vertex2d initialPoint, Vertex2d lastPoint) {
     int xVariation, yVariation, currentX, currentY;
     int const1, const2, d, lastX;
+    Line line;
+    Vertex2d pointToAdd;
     
-    xVariation = abs(finalX - initialX);
-    yVariation = abs(finalY - initialY);
+    xVariation = abs((int)(lastPoint.getX() - initialPoint.getX()));
+    yVariation = abs((int)(lastPoint.getY() - initialPoint.getY()));
     
     d = (2 * xVariation) - yVariation;
     const1 = 2 * xVariation;
     const2 = 2 * (yVariation - xVariation);
     
-    if (initialX > finalX) {
-        currentX = finalX;
-        currentY = finalY;
-        lastX = initialX;
+    if (initialPoint.getX() > lastPoint.getX()) {
+        currentX = lastPoint.getX();
+        currentY = lastPoint.getY();
+        lastX = initialPoint.getX();
     } else {
-        currentX = initialX;
-        currentY = initialY;
-        lastX = finalX;
+        currentX = initialPoint.getX();
+        currentY = initialPoint.getY();
+        lastX = lastPoint.getX();
     }
     
-    glBegin(GL_POINTS);
-    glColor3f(255, 255, 255);
-    glVertex3i(currentX, currentY, 0);
-    glEnd();
-    
-    glBegin(GL_POINTS);
+    pointToAdd.setX(currentX);
+    pointToAdd.setY(currentY);
+    line.addPoint(pointToAdd);
     
     while (currentX < lastX) {
         currentX++;
@@ -55,58 +56,94 @@ void displayLineBresenham(int initialX, int initialY, int finalX, int finalY) {
             currentY++;
             d += const2;
         }
-        glVertex3i(currentX, currentY, 0);
+        pointToAdd.setX(currentX);
+        pointToAdd.setY(currentY);
+        line.addPoint(pointToAdd);
     }
     
-    glEnd();
+    return line;
 }
 
 /**
- * Print the points for a circunference for some x coordinate and y coordinate
- * @param xCenter the x coordinate of the center of the circumference
- * @param yCenter the y coordinate of the center of the circumference
- * @param x the
+ * Generate the points for a circunference
+ * @param circumference (Circumference*)
+ * @param center {Vertex2d} - the center of the circumference
+ * @param currentPoint {Vertex2d} - the current point
  */
-void printCircumferencePoints(int xCenter, int yCenter, int x, int y) {
-    glBegin(GL_POINTS);
-    glColor3f(255, 255, 255);
-    glVertex3i(xCenter + x, yCenter + y, 0);
-    glVertex3i(xCenter + y, yCenter + x, 0);
-    glVertex3i(xCenter + y, yCenter - x, 0);
-    glVertex3i(xCenter + x, yCenter - y, 0);
-    glVertex3i(xCenter - x, yCenter - y, 0);
-    glVertex3i(xCenter - y, yCenter - x, 0);
-    glVertex3i(xCenter - y, yCenter + x, 0);
-    glVertex3i(xCenter - x, yCenter + y, 0);
-    glEnd();
+void generateCircumferencePoints(Circumference *circumference, Vertex2d center, Vertex2d currentPoint) {
+    Vertex2d pointToAdd;
+    int x = currentPoint.getX();
+    int y = currentPoint.getY();
+    
+    pointToAdd.setX(center.getX() + x);
+    pointToAdd.setY(center.getY() + y);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() + y);
+    pointToAdd.setY(center.getY() + x);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() + y);
+    pointToAdd.setY(center.getY() - x);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() + x);
+    pointToAdd.setY(center.getY() - y);
+    circumference->addPoint(pointToAdd);
+  
+    pointToAdd.setX(center.getX() - x);
+    pointToAdd.setY(center.getY() - y);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() - y);
+    pointToAdd.setY(center.getY() - x);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() - y);
+    pointToAdd.setY(center.getY() + x);
+    circumference->addPoint(pointToAdd);
+    
+    pointToAdd.setX(center.getX() - x);
+    pointToAdd.setY(center.getY() + y);
+    circumference->addPoint(pointToAdd);
 }
 
 /**
- * Display a circumference on the screen, using the Bresenham algorithm for circumferences
- * @param xCenter the x coordinate of the center of the circumference
- * @param yCenter the y coordinate of the center of the circumference
+ * Generate a circumference, using the Bresenham algorithm for circumferences
+ * @param center {Vertex2d} the coordinate of the circumference's center
  * @param radius the radius of the circumference
  */
-void displayCircumferenceBresenham(int xCenter, int yCenter, int radius) {
+Circumference generateCircumferenceBresenham(Vertex2d center, int radius) {
     int currentX, currentY, d;
+    Circumference circumference(radius);
+    Circumference *reference = &circumference;
+    Vertex2d currentPoint;
     
-    currentX = 0;
-    currentY = radius;
+    currentPoint.setX(0);
+    currentPoint.setY(radius);
     d = 1 - radius;
     
-    printCircumferencePoints(xCenter, yCenter, currentX, currentY);
+    generateCircumferencePoints(reference, center, currentPoint);
+    
+    currentX = currentPoint.getX();
+    currentY = currentPoint.getY();
     
     while (currentX < currentY) {
+        currentX = currentPoint.getX();
+        currentY = currentPoint.getY();
+        
         if (d < 0) {
             d = d + (2 * currentX) + 3;
         } else {
             d = d + 2 * (currentX - currentY) + 5;
-            currentY -= 1;
+            currentPoint.setY(currentY - 1);
         }
         
-        currentX++;
-        printCircumferencePoints(xCenter, yCenter, currentX, currentY);
+        currentPoint.setX(currentX + 1);
+        generateCircumferencePoints(reference, center, currentPoint);
     }
+    
+    return circumference;
 }
 
 #endif /* bresenham_h */
