@@ -8,9 +8,8 @@
 #ifndef Matrix2d_hpp
 #define Matrix2d_hpp
 
-#include <stdio.h>
-#include <iostream>  /* std */
 #include <vector>
+#include "../common/GeometricFigure.hpp"
 
 class Matrix2d {
 public:
@@ -32,6 +31,8 @@ public:
     Matrix2d operator+(const Matrix2d& other);
     Matrix2d operator-(const Matrix2d& other);
     Matrix2d operator*(const Matrix2d& other);
+    GeometricFigure operator*(const GeometricFigure& figure);
+    Vertex2d operator*(const Vertex2d& point);
     
 private:
     // the matrix itself, always 3x3

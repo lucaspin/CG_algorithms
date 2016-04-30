@@ -25,7 +25,7 @@
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
-#define WINDOW_TITLE "Scan Line algorithm"
+#define WINDOW_TITLE "Computer Graphics Algorithms"
 
 using namespace std;
 
@@ -33,8 +33,7 @@ void onDisplay();
 void centerOnScreen();
 Polygon generatePolygon();
 void printGeometricFigure(GeometricFigure figure);
-void matrix2dDemo();
-void transformationMatrixDemo();
+void transformationDemo();
 
 // Define the window position on screen
 int window_x;
@@ -68,7 +67,7 @@ void printGeometricFigure(GeometricFigure figure) {
     glColor3f(1.0, 1.0, 1.0);
     
     for (Vertex2d point : figure.getPoints()) {
-        glVertex3i(point.getX(), point.getY(), point.getZ());
+        glVertex3i(point.getX(), point.getY(), point.getZ() - 1);
     }
     
     glEnd();
@@ -80,8 +79,8 @@ void onDisplay() {
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
-    // TODO: apply some kind of transformation
-
+    transformationDemo();
+    
     glFlush();
     glutSwapBuffers();
 }
@@ -111,35 +110,18 @@ Polygon generatePolygon() {
     return edgesTable.initScanLineAlgorithm();
 }
 
-void matrix2dDemo() {
-    vector<float> m1Values = {1,1,1,2,2,2,3,3,3};
-    vector<float> m2Values = {2,2,3,3,4,4,1,1,1};
+void transformationDemo() {
+    // Create a polygon and print it
+    Polygon polygon = generatePolygon();
+    printGeometricFigure(polygon);
     
-    Matrix2d m1(m1Values);
-    Matrix2d m2(m2Values);
-    Matrix2d m3 = m1 * m2;
-    
-    m3.printMatrix2d();
-}
-
-void transformationMatrixDemo() {
-    //Translate Matrix2d
-    cout << "Translation matrix for dx = 4 and dy = 1" << endl;
+    // Get the transformation matrix for a variation of 200 in both axis
     Matrix2d testTranslateMatrix;
-    testTranslateMatrix = TransformationMatrix::getInstance()->translate(4.0f, 1.0f);
-    testTranslateMatrix.printMatrix2d();
+    testTranslateMatrix = TransformationMatrix::getInstance()->translate(200.0f, 200.0f);
     
-    //Rotate Matrix2d
-    cout << "Rotation matrix of 30 degress around (8,10)" << endl;
-    Matrix2d testRotateMatrix;
-    testRotateMatrix = TransformationMatrix::getInstance()->rotate(30.0f, 8.0f, 10.0f);
-    testRotateMatrix.printMatrix2d();
-    
-    //Scale Matrix2d
-    cout << "Scale matrix of 40% around (6,8)" << endl;
-    Matrix2d testScaleMatrix;
-    testScaleMatrix = TransformationMatrix::getInstance()->scale(1.4f, 1.4f, 6.0f, 8.0f);
-    testScaleMatrix.printMatrix2d();
+    // Get the translated polygon and print it
+    GeometricFigure translatedPolygon = testTranslateMatrix * polygon;
+    printGeometricFigure(translatedPolygon);
 }
 
 /**

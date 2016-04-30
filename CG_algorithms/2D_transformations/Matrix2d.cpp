@@ -7,6 +7,7 @@
  */
 
 #include "Matrix2d.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -152,18 +153,55 @@ Matrix2d Matrix2d::operator*(const Matrix2d& other) {
         }
     }
     
-    
-    
     return outputMatrix;
 }
 
+GeometricFigure Matrix2d::operator*(const GeometricFigure& figure) {
+    GeometricFigure newFigure;
+    
+    for (Vertex2d point : figure.getPoints()) {
+        Vertex2d newPoint = (*this) * point;
+        newFigure.addPoint(newPoint);
+    }
+    
+    return newFigure;
+}
 
-
-
-
-
-
-
-
+Vertex2d Matrix2d::operator*(const Vertex2d& point) {
+    Vertex2d newPoint;
+    float newValue;
+    
+    for (int row = 0; row < 3; row++) {
+        newValue = 0;
+        
+        for (int col = 0; col < 3; col++) {
+            switch(col) {
+                case 0:
+                    newValue += point.getX() * this->getMatrix2d()[row][col];
+                    break;
+                case 1:
+                    newValue += point.getY() * this->getMatrix2d()[row][col];
+                    break;
+                case 2:
+                    newValue += point.getZ() * this->getMatrix2d()[row][col];
+                    break;
+            }
+        }
+        
+        switch (row) {
+            case 0:
+                newPoint.setX(newValue);
+                break;
+            case 1:
+                newPoint.setY(newValue);
+                break;
+            case 2:
+                newPoint.setZ(newValue);
+                break;
+        }
+    }
+    
+    return newPoint;
+}
 
 
