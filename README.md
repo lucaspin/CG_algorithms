@@ -14,8 +14,6 @@ The current algorithms present here are:
 Implement 2D transformations
 
 - [ ] Implement function for mirroring
-- [ ] Create a namespace for all the transformation functions
-- [ ] Fix scale transformation issue
 
 ## Authors
 
