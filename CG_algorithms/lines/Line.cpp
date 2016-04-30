@@ -167,3 +167,11 @@ void Line::translate(float dx, float dy) {
     Matrix2d translationMatrix = TransformationMatrix::getInstance()->getTranslationMatrix(dx, dy);
     this->applyTransformationMatrix(translationMatrix);
 }
+
+void Line::scale(float xScaleFactor, float yScaleFactor, float xPivot, float yPivot) {
+    Matrix2d scaleMatrix = TransformationMatrix::getInstance()->getScaleMatrix(xScaleFactor,
+                                                                               yScaleFactor,
+                                                                               xPivot, yPivot);
+    
+    this->applyTransformationMatrix(scaleMatrix);
+}

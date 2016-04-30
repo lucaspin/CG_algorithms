@@ -132,3 +132,8 @@ void Polygon::translate(float dx, float dy) {
     Matrix2d translationMatrix = TransformationMatrix::getInstance()->getTranslationMatrix(dx, dy);
     this->applyTransformationMatrix(translationMatrix);
 }
+
+void Polygon::scale(float xFactor, float yFactor, float xPivot, float yPivot) {
+    Matrix2d scaleMatrix = TransformationMatrix::getInstance()->getScaleMatrix(xFactor, yFactor, xPivot, yPivot);
+    this->applyTransformationMatrix(scaleMatrix);
+}

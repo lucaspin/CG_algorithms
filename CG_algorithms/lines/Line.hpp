@@ -23,6 +23,7 @@ public:
     static Line generateLineBresenham(Vertex2d, Vertex2d);
     static Line generateLineDDA(Vertex2d, Vertex2d);
     void translate(float, float);
+    void scale(float, float, float, float);
 private:
     void applyTransformationMatrix(Matrix2d transformationMatrix);
     
