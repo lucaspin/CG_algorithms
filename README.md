@@ -7,22 +7,15 @@ The current algorithms present here are:
 - DDA algorithm for drawing lines
 - Bresenham algorithm for drawing lines and circles
 - Scan Line algorithm for filling polygons
-- Matrix2d class
+- 2D transformations
 
 ## TODO
 
 Implement 2D transformations
 
-- [x] Create the Matrix2d class
-- [x] Create a constructor that accepts a vector of values to initialize the Matrix2d
-- [x] Implement functions to get and set the value of a Matrix2d
-- [x] Overload the * operator to multiply objects of class Matrix2d (dot product)
-- [x] Create the TransformationMatrix class as a singleton
-- [x] Implement function for translation
-- [x] Implement function for rotation
-- [x] Implement function for scaling
-- [ ] Implement function for shearing
 - [ ] Implement function for mirroring
+- [ ] Create a namespace for all the transformation functions
+- [ ] Fix scale transformation issue
 
 ## Authors
 
