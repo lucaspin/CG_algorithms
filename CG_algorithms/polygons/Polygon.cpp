@@ -137,3 +137,8 @@ void Polygon::scale(float xFactor, float yFactor, float xPivot, float yPivot) {
     Matrix2d scaleMatrix = TransformationMatrix::getInstance()->getScaleMatrix(xFactor, yFactor, xPivot, yPivot);
     this->applyTransformationMatrix(scaleMatrix);
 }
+
+void Polygon::rotate(float angle, float xPivot, float yPivot) {
+    Matrix2d rotationMatrix = TransformationMatrix::getInstance()->getRotationMatrix(angle, xPivot, yPivot);
+    this->applyTransformationMatrix(rotationMatrix);
+}

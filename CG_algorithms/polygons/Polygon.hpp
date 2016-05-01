@@ -21,6 +21,7 @@ public:
     static Polygon generatePolygon(std::list<Vertex2d>);
     void translate(float, float);
     void scale(float, float, float, float);
+    void rotate(float, float, float);
 private:
     void applyTransformationMatrix(Matrix2d transformationMatrix);
     std::list<Vertex2d> vertices;

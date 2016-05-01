@@ -109,64 +109,38 @@ void translatePolygonDemo() {
     printGeometricFigure(polygon);
 }
 
-void scalePolygonDemo() {
+void transformationDemo() {
     // The list of points that will form the polygon
     list<Vertex2d> listOfCoordinates;
     
     // Create some points
-    Vertex2d pointA(40, 60, 1.0f);
-    Vertex2d pointB(140, 20, 1.0f);
-    Vertex2d pointC(260, 100, 1.0f);
-    Vertex2d pointD(260, 200, 1.0f);
-    Vertex2d pointE(140, 140, 1.0f);
-    Vertex2d pointF(40, 180, 1.0f);
+    Vertex2d pointA(50, 50, 1.0f);
+    Vertex2d pointB(100, 50, 1.0f);
+    Vertex2d pointC(100, 100, 1.0f);
+    Vertex2d pointD(50, 100, 1.0f);
     
     // Create the list of points
     listOfCoordinates.push_back(pointA);
     listOfCoordinates.push_back(pointB);
     listOfCoordinates.push_back(pointC);
     listOfCoordinates.push_back(pointD);
-    listOfCoordinates.push_back(pointE);
-    listOfCoordinates.push_back(pointF);
     
     Polygon polygon = Polygon::generatePolygon(listOfCoordinates);
-    polygon.scale(2.0f, 2.0f, 0, 0);
     printGeometricFigure(polygon);
-}
-
-void translateCircumferenceDemo() {
-    Vertex2d center(100, 100, 1.0f);
-    Circumference circ = Circumference::generateCircumferenceBresenham(center, 50);
-    printGeometricFigure(circ);
-    circ.translate(200, 200);
-    printGeometricFigure(circ);
-}
-
-void translateLineDemo() {
-    Vertex2d initialPoint(100, 100, 1);
-    Vertex2d finalPoint(300, 300, 1);
-    Line line = Line::generateLineDDA(initialPoint, finalPoint);
-    printGeometricFigure(line);
-    line.translate(200.0f, 200.0f);
-    printGeometricFigure(line);
-}
-
-void scaleLineDemo() {
-    Vertex2d initialPoint(20, 20, 1);
-    Vertex2d finalPoint(200, 200, 1);
-    Line line = Line::generateLineDDA(initialPoint, finalPoint);
-    printGeometricFigure(line);
-    line.translate(50.0f, 0.0f);
-    line.scale(2.0f, 1.4f, 20, 20);
-    printGeometricFigure(line);
-}
-
-void transformationDemo() {
-//    translateLineDemo();
-//    translatePolygonDemo();
-//    translateCircumferenceDemo();
-//    scaleLineDemo();
-    scalePolygonDemo();
+    
+    // Translation
+    polygon.translate(100, 0);
+    printGeometricFigure(polygon);
+    
+    // Scale
+    polygon.translate(100, 200);
+    polygon.scale(1.5f, 1.5f, 150, 150);
+    printGeometricFigure(polygon);
+    
+    // Rotation
+    polygon.translate(-100, 0);
+    polygon.rotate(45.0f, 150, 150);
+    printGeometricFigure(polygon);
 }
 
 /**
