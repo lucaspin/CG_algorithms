@@ -60,17 +60,6 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-void printGeometricFigure(GeometricFigure figure) {
-    glBegin(GL_POINTS);
-    glColor3f(1.0, 1.0, 1.0);
-    
-    for (Vertex2d point : figure.getPoints()) {
-        glVertex3i(point.getX(), point.getY(), point.getZ() - 1);
-    }
-    
-    glEnd();
-}
-
 void onDisplay() {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -81,32 +70,6 @@ void onDisplay() {
     
     glFlush();
     glutSwapBuffers();
-}
-
-void translatePolygonDemo() {
-    // The list of points that will form the polygon
-    list<Vertex2d> listOfCoordinates;
-    
-    // Create some points
-    Vertex2d pointA(40, 60, 1.0f);
-    Vertex2d pointB(140, 20, 1.0f);
-    Vertex2d pointC(260, 100, 1.0f);
-    Vertex2d pointD(260, 200, 1.0f);
-    Vertex2d pointE(140, 140, 1.0f);
-    Vertex2d pointF(40, 180, 1.0f);
-    
-    // Create the list of points
-    listOfCoordinates.push_back(pointA);
-    listOfCoordinates.push_back(pointB);
-    listOfCoordinates.push_back(pointC);
-    listOfCoordinates.push_back(pointD);
-    listOfCoordinates.push_back(pointE);
-    listOfCoordinates.push_back(pointF);
-    
-    Polygon polygon = Polygon::generatePolygon(listOfCoordinates);
-    printGeometricFigure(polygon);
-    polygon.translate(200, 200);
-    printGeometricFigure(polygon);
 }
 
 void transformationDemo() {
@@ -126,21 +89,21 @@ void transformationDemo() {
     listOfCoordinates.push_back(pointD);
     
     Polygon polygon = Polygon::generatePolygon(listOfCoordinates);
-    printGeometricFigure(polygon);
+    polygon.GeometricFigure::plotPoints();
     
     // Translation
     polygon.translate(100, 0);
-    printGeometricFigure(polygon);
+    polygon.GeometricFigure::plotPoints();
     
     // Scale
     polygon.translate(100, 200);
     polygon.scale(1.5f, 1.5f, 150, 150);
-    printGeometricFigure(polygon);
+    polygon.GeometricFigure::plotPoints();
     
     // Rotation
     polygon.translate(-100, 0);
     polygon.rotate(45.0f, 150, 150);
-    printGeometricFigure(polygon);
+    polygon.GeometricFigure::plotPoints();
 }
 
 /**

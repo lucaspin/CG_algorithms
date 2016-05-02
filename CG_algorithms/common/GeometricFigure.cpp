@@ -7,6 +7,7 @@
 
 #include "GeometricFigure.hpp"
 #include "../common/Vertex2d.hpp"
+#include "OpenGL/gl.h"
 
 using namespace std;
 
@@ -32,4 +33,19 @@ void GeometricFigure::setPoints(vector<Vertex2d> newPoints) {
  */
 void GeometricFigure::addPoint(Vertex2d newPoint) {
     this->points.push_back(newPoint);
+}
+
+/**
+ * Plot the geometric figure points in the screen,
+ * using OpenGL library
+ */
+void GeometricFigure::plotPoints() {
+    glBegin(GL_POINTS);
+    glColor3f(1.0, 1.0, 1.0);
+    
+    for (Vertex2d point : this->getPoints()) {
+        glVertex3i(point.getX(), point.getY(), point.getZ() - 1);
+    }
+    
+    glEnd();
 }
