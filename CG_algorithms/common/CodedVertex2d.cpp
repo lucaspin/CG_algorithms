@@ -7,8 +7,6 @@
  */
 
 #include "CodedVertex2d.hpp"
-#include "Vertex2d.hpp"
-#include <vector>
 
 using namespace std;
 
@@ -30,6 +28,15 @@ CodedVertex2d::CodedVertex2d(float x, float y, float z):Vertex2d(x, y, z) {
 void CodedVertex2d::setRegionCode(vector<bool> _regionCode) {
     this->regionCode = _regionCode;
 }
+
+/**
+ * Get the RegionCode
+ * @return {vector<bool>}
+ */
+vector<bool> CodedVertex2d::getRegionCode() {
+    return this->regionCode;
+}
+
 
 /**
  * Setter for the regionCode (top)

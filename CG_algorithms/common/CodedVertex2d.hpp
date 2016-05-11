@@ -19,6 +19,7 @@ private:
 public:
     CodedVertex2d(float x, float y, float z);
     void setRegionCode(std::vector<bool> _regionCode);
+    std::vector<bool> getRegionCode();
     void setTopRegionCode(bool _state);
     void setBottomRegionCode(bool _state);
     void setRightRegionCode(bool _state);
