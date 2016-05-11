@@ -21,6 +21,7 @@ using namespace std;
 Circumference::Circumference(Vertex2d center, int radius):GeometricFigure() {
     this->setCenter(center);
     this->setRadius(radius);
+    GeometricFigure::setType(CIRCUMFERENCE);
 }
 
 /**

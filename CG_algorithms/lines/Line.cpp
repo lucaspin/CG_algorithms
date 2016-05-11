@@ -22,6 +22,7 @@ using namespace std;
 Line::Line(Vertex2d initialPoint, Vertex2d finalPoint):GeometricFigure() {
     this->setInitialPoint(initialPoint);
     this->setFinalPoint(finalPoint);
+    GeometricFigure::setType(LINE);
 }
 
 /**

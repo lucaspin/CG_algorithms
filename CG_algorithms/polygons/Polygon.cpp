@@ -21,6 +21,7 @@ using namespace std;
  */
 Polygon::Polygon(list<Vertex2d> listOfVertices):GeometricFigure() {
     this->setVerticesList(listOfVertices);
+    GeometricFigure::setType(POLYGON);
 }
 
 /**

@@ -49,3 +49,19 @@ void GeometricFigure::plotPoints() {
     
     glEnd();
 }
+
+/**
+ * Set the type of the GeometricFigure
+ * @param _type {GeometricFigureType}
+ */
+void GeometricFigure::setType(GeometricFigureType _type) {
+    this->type = _type;
+}
+
+/**
+ * Get the type of the GeometricFigure
+ * @return type {GeometricFigureType}
+ */
+GeometricFigureType GeometricFigure::getType() {
+    return this->type;
+}
