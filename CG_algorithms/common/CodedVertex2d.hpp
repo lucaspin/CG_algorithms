@@ -18,6 +18,7 @@ private:
     std::vector<bool> regionCode;
 public:
     CodedVertex2d(float x, float y, float z);
+    CodedVertex2d(float x, float y);
     void setRegionCode(std::vector<bool> _regionCode);
     std::vector<bool> getRegionCode();
     void setTopRegionCode(bool _state);

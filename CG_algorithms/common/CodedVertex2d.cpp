@@ -14,9 +14,19 @@ using namespace std;
  * Constructor of the class
  * @param {float x}
  * @param {float y}
- * @param {float y}
+ * @param {float z}
  */
 CodedVertex2d::CodedVertex2d(float x, float y, float z):Vertex2d(x, y, z) {
+    vector<bool> regionCode = {false, false, false, false};
+    this->setRegionCode(regionCode);
+}
+
+/**
+ * Constructor of the class
+ * @param {float x}
+ * @param {float y}
+ */
+CodedVertex2d::CodedVertex2d(float x, float y):Vertex2d(x, y) {
     vector<bool> regionCode = {false, false, false, false};
     this->setRegionCode(regionCode);
 }

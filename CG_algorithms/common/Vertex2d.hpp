@@ -17,6 +17,7 @@ public:
     
     Vertex2d();
     Vertex2d(float, float, float);
+    Vertex2d(float, float);
     float getX() const;
     float getY() const;
     float getZ() const;

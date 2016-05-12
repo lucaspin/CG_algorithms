@@ -21,11 +21,23 @@ Vertex2d::Vertex2d() {
  * @constructor
  * @param {float} - the x coordinate of the point
  * @param {float} - the y coordinate of the point
+ * @param {float} - the z parameter of the point
  */
 Vertex2d::Vertex2d(float x, float y, float z) {
     this->setX(x);
     this->setY(y);
     this->setZ(z);
+}
+
+/**
+ * @constructor
+ * @param {float} - the x coordinate of the point
+ * @param {float} - the y coordinate of the point
+ */
+Vertex2d::Vertex2d(float x, float y) {
+    this->setX(x);
+    this->setY(y);
+    this->setZ(1.0f);
 }
 
 /**
