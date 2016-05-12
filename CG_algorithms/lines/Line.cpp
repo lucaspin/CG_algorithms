@@ -26,6 +26,19 @@ Line::Line(Vertex2d initialPoint, Vertex2d finalPoint):GeometricFigure() {
 }
 
 /**
+ * Constructor for the class
+ * @param x1 {float}
+ * @param y1 {float}
+ * @param x2 {float}
+ * @param x2 {float}
+ */
+Line::Line(float x1, float y1, float x2, float y2):GeometricFigure() {
+    Vertex2d initialPoint(x1, y1);
+    Vertex2d finalPoint(x2, y2);
+    Line(initialPoint, finalPoint);
+}
+
+/**
  * Generate a line, using the Bresenham algorithm
  * @param initialPoint {Vertex2d} - the initial coordinate of the line
  * @param lastPoint {Vertex2d} - the last coordinate of the line

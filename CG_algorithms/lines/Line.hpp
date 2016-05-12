@@ -16,6 +16,7 @@
 class Line : public GeometricFigure {
 public:
     Line(Vertex2d, Vertex2d);
+    Line(float x1, float y1, float x2, float y2);
     Vertex2d getInitialPoint() const;
     void setInitialPoint(Vertex2d);
     Vertex2d getFinalPoint() const;
