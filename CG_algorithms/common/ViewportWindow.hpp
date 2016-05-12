@@ -9,6 +9,7 @@
 #define ViewportWindow_hpp
 #include "Vertex2d.hpp"
 #include "GeometricFigure.hpp"
+#include "CodedVertex2d.hpp"
 #include <list>
 #include "../lines/Line.hpp"
 #include "../polygons/Polygon.hpp"
@@ -19,6 +20,8 @@ private:
     Vertex2d bottomLeftCorner;
     Vertex2d topRightCorner;
     std::list<GeometricFigure> visibleObjects;
+    bool clipLineAcceptanceTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
+    bool clipLineRejectionTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
 public:
     ViewportWindow(Vertex2d _bottomLeftCorner, Vertex2d topRightCorner);
     void setBottomLeftCorner(Vertex2d _bottomLeftCorner);

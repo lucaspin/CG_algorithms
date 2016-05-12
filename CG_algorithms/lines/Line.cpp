@@ -30,12 +30,14 @@ Line::Line(Vertex2d initialPoint, Vertex2d finalPoint):GeometricFigure() {
  * @param x1 {float}
  * @param y1 {float}
  * @param x2 {float}
- * @param x2 {float}
+ * @param y2 {float}
  */
 Line::Line(float x1, float y1, float x2, float y2):GeometricFigure() {
     Vertex2d initialPoint(x1, y1);
     Vertex2d finalPoint(x2, y2);
-    Line(initialPoint, finalPoint);
+    this->setInitialPoint(initialPoint);
+    this->setFinalPoint(finalPoint);
+    GeometricFigure::setType(LINE);
 }
 
 /**
