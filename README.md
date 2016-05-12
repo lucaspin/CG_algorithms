@@ -15,6 +15,11 @@ Implement 2D transformations
 
 - [ ] Implement function for mirroring
 
+Clipping 
+- [ ] Implement clipLine in ViewportWindows class - Cohen-Sutherland algorithm
+- [ ] Implement clipPolygon in ViewportWindows class - Hodgman-Sutherland algorithm
+- [ ] review the ViewportWindow class (specially clip method)
+
 ## Authors
 
 Lucas Pinheiro @lucaspin<br>
