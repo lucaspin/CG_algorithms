@@ -9,6 +9,7 @@
 #include "../common/Vertex2d.hpp"
 #include "../2D_transformations/TransformationMatrix.hpp"
 #include "../2D_transformations/Matrix2d.hpp"
+#include "../lines/Line.hpp"
 #include "PolygonEdge.hpp"
 #include "EdgesTable.hpp"
 #include <list>
@@ -18,10 +19,28 @@ using namespace std;
 /**
  * Constructor of the class
  * @param listOfVertices {list<Vertex2d>}
+ * @param filled {bool} - whether the polygon is filled or not, default value is false
  */
-Polygon::Polygon(list<Vertex2d> listOfVertices):GeometricFigure() {
+Polygon::Polygon(list<Vertex2d> listOfVertices, bool filled):GeometricFigure() {
     this->setVerticesList(listOfVertices);
     GeometricFigure::setType(POLYGON);
+    this->setFilled(filled);
+}
+
+/**
+ * Getter for filled attribute
+ * @return {bool}
+ */
+bool Polygon::isFilled() const {
+    return this->filled;
+}
+
+/**
+ * Setter for filled attribute
+ * @param {bool}
+ */
+void Polygon::setFilled(bool filled) {
+    this->filled = filled;
 }
 
 /**
@@ -41,15 +60,16 @@ void Polygon::setVerticesList(list<Vertex2d> newListOfVertices) {
 }
 
 /**
+ * TODO: change this method to another stage of pipeline (rendering)
  * Generates a polygon using the Scan Line algorithm
  * @param vertices {list<Vertex2d>}
  */
-Polygon Polygon::generatePolygon(list<Vertex2d> vertices) {
+Polygon Polygon::generateFilledPolygon(list<Vertex2d> vertices) {
     EdgesTable edgesTable(vertices);
     list<PolygonEdge> activeEdges;
     Polygon polygon(vertices);
     Vertex2d pointToAdd;
-    
+
     // Get the smaller y from the list of polygon vertices
     int scanLineY = min_element(vertices.begin(), vertices.end())->getY();
     
@@ -111,6 +131,31 @@ Polygon Polygon::generatePolygon(list<Vertex2d> vertices) {
     return polygon;
 }
 
+/**
+ * TODO: change this method to another stage of pipeline (rendering)
+ * Generates a empty polygon
+ * @param vertices {list<Vertex2d>}
+ */
+Polygon Polygon::generateNotFilledPolygon(list<Vertex2d> vertices) {
+    Polygon polygon(vertices);
+    Vertex2d pointToAdd;
+    std::list<Vertex2d>::const_iterator it;
+    
+    for (it = vertices.begin(); it != vertices.end(); it++) {
+        auto nextVertice = next(it);
+        if (nextVertice == vertices.end()) {nextVertice = vertices.begin();}
+        Line tempLine = Line::generateLineDDA(*it, *nextVertice);
+        std::vector<Vertex2d>::const_iterator lineIt;
+        std::vector<Vertex2d> tempLineArray = tempLine.GeometricFigure::getPoints();
+        for (lineIt = tempLineArray.begin(); lineIt != tempLineArray.end(); lineIt++) {
+            auto tempVertex2d = lineIt;
+            polygon.addPoint(*tempVertex2d);
+        }
+    }
+    
+    return polygon;
+}
+
 void Polygon::applyTransformationMatrix(Matrix2d transformationMatrix) {
     list<Vertex2d> newVerticeList;
     Vertex2d newVertice;
@@ -122,7 +167,8 @@ void Polygon::applyTransformationMatrix(Matrix2d transformationMatrix) {
     }
     
     // Create a new polygon with the new vertices
-    Polygon newPolygon = Polygon::generatePolygon(newVerticeList);
+    // TODO change this rendering method
+    Polygon newPolygon = Polygon::generateFilledPolygon(newVerticeList);
     
     // Set the new properties
     this->setVerticesList(newVerticeList);

@@ -15,14 +15,18 @@
 
 class Polygon : public GeometricFigure {
 public:
-    Polygon(std::list<Vertex2d>);
+    Polygon(std::list<Vertex2d>, bool filled = false);
+    bool isFilled() const;
+    void setFilled(bool filled);
     std::list<Vertex2d> getVerticesList() const;
     void setVerticesList(std::list<Vertex2d>);
-    static Polygon generatePolygon(std::list<Vertex2d>);
+    static Polygon generateFilledPolygon(std::list<Vertex2d>);
+    static Polygon generateNotFilledPolygon(std::list<Vertex2d>);
     void translate(float, float);
     void scale(float, float, float, float);
     void rotate(float, float, float);
 private:
+    bool filled;
     void applyTransformationMatrix(Matrix2d transformationMatrix);
     std::list<Vertex2d> vertices;
 };

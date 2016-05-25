@@ -31,9 +31,10 @@ using namespace std;
 
 void onDisplay();
 void centerOnScreen();
-Polygon generatePolygon();
+Polygon generateFilledPolygon();
 void printGeometricFigure(GeometricFigure figure);
-void viewportDemo();
+void viewportClipLineDemo();
+void viewportClipPolygonDemo();
 void transformationDemo();
 
 // Define the window position on screen
@@ -69,14 +70,15 @@ void onDisplay() {
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
-    viewportDemo();
-//    transformationDemo();
+    viewportClipLineDemo();
+    viewportClipPolygonDemo();
+    //    transformationDemo();
     
     glFlush();
     glutSwapBuffers();
 }
 
-void viewportDemo() {
+void viewportClipLineDemo() {
     Vertex2d bottomLeftCorner(100.0f, 100.0f);
     Vertex2d topRightCorner(200.0f, 200.0f);
     ViewportWindow vpw(bottomLeftCorner, topRightCorner);
@@ -98,27 +100,25 @@ void viewportDemo() {
     Vertex2d topRight(200.0f, 200.0f);
     Vertex2d bottomLeft(100.0f, 100.0f);
     Vertex2d bottomRight(200.0f, 100.0f);
-    Line topLine = Line::generateLineDDA(topLeft, topRight);
-    Line bottomLine = Line::generateLineDDA(bottomLeft, bottomRight);
-    Line leftLine = Line::generateLineDDA(bottomLeft, topLeft);
-    Line rightLine = Line::generateLineDDA(bottomRight, topRight);
-    
-    // Print the viewport
-    topLine.GeometricFigure::plotPoints();
-    bottomLine.GeometricFigure::plotPoints();
-    leftLine.GeometricFigure::plotPoints();
-    rightLine.GeometricFigure::plotPoints();
+    list<Vertex2d> listPoligonViewPort;
+    listPoligonViewPort.push_back(topLeft);
+    listPoligonViewPort.push_back(bottomLeft);
+    listPoligonViewPort.push_back(bottomRight);
+    listPoligonViewPort.push_back(topRight);
+    Polygon poligonViewPort = Polygon::generateNotFilledPolygon(listPoligonViewPort);
+    poligonViewPort.GeometricFigure::plotPoints();
+    poligonViewPort.translate(0.0f, 150.0f);
     
     // Print the lines without clipping
 //    line1.plotPoints();
 //    line2.plotPoints();
 //    line3.plotPoints();
-      line4.plotPoints();
+//    line4.plotPoints();
     
-//    vpw.clipLine(line1);
-//    vpw.clipLine(line2);
-//    vpw.clipLine(line3);
-      vpw.clipLine(line4);
+    vpw.clipLine(line1);
+    vpw.clipLine(line2);
+    vpw.clipLine(line3);
+    vpw.clipLine(line4);
 
     std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
     std::list<GeometricFigure*>::const_iterator it;
@@ -129,6 +129,47 @@ void viewportDemo() {
         Line line = Line::generateLineDDA(initialPoint, finalPoint);
         line.GeometricFigure::plotPoints();
     }
+}
+
+void viewportClipPolygonDemo() {
+    // Simulate the viewport borders
+    Vertex2d topLeft(300.0f, 200.0f);
+    Vertex2d topRight(400.0f, 200.0f);
+    Vertex2d bottomLeft(300.0f, 100.0f);
+    Vertex2d bottomRight(400.0f, 100.0f);
+    Line topLine = Line::generateLineDDA(topLeft, topRight);
+    Line bottomLine = Line::generateLineDDA(bottomLeft, bottomRight);
+    Line leftLine = Line::generateLineDDA(bottomLeft, topLeft);
+    Line rightLine = Line::generateLineDDA(bottomRight, topRight);
+    
+    // Print the viewport
+    topLine.GeometricFigure::plotPoints();
+    bottomLine.GeometricFigure::plotPoints();
+    leftLine.GeometricFigure::plotPoints();
+    rightLine.GeometricFigure::plotPoints();
+
+    // Draw some polygons
+    Vertex2d a(320.0f, 120.0f);
+    Vertex2d b(280.0f, 180.0f);
+    Vertex2d c(350.0f, 230.0f);
+    Vertex2d d(430.0f, 150.0f);
+    
+    list<Vertex2d> listPoligonViewPort;
+    listPoligonViewPort.push_back(topLeft);
+    listPoligonViewPort.push_back(bottomLeft);
+    listPoligonViewPort.push_back(bottomRight);
+    listPoligonViewPort.push_back(topRight);
+    Polygon poligonViewPort = Polygon::generateNotFilledPolygon(listPoligonViewPort);
+    
+//    Vertex2d e(60.0f, 300.0f);POlygoon
+//    Vertex2d f(250.0f, 190.0f);
+    list<Vertex2d> listPolygon1;
+    listPolygon1.push_back(a);
+    listPolygon1.push_back(b);
+    listPolygon1.push_back(c);
+    listPolygon1.push_back(d);
+    Polygon poligon1 = Polygon::generateFilledPolygon(listPolygon1);
+    poligon1.GeometricFigure::plotPoints();
 }
 
 void transformationDemo() {
@@ -147,7 +188,7 @@ void transformationDemo() {
     listOfCoordinates.push_back(pointC);
     listOfCoordinates.push_back(pointD);
     
-    Polygon polygon = Polygon::generatePolygon(listOfCoordinates);
+    Polygon polygon = Polygon::generateFilledPolygon(listOfCoordinates);
     polygon.GeometricFigure::plotPoints();
     
     // Translation
