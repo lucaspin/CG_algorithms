@@ -165,12 +165,13 @@ void ViewportWindow::clipLine(Line _line) {
                 newPoint.setY(y1);
                 initialCodedPoint.setLeftRegionCode(false);
                 _line.setInitialPoint(newPoint);
+                
             } else if (finalCodedPoint.getLeftRegionCode()) {
                 x1 = xMin;
                 y1 = finalY - m * (finalX - x1);
                 newPoint.setX(x1);
                 newPoint.setY(y1);
-                initialCodedPoint.setLeftRegionCode(false);
+                finalCodedPoint.setLeftRegionCode(false);
                 _line.setFinalPoint(newPoint);
             }
             
@@ -187,7 +188,7 @@ void ViewportWindow::clipLine(Line _line) {
                 y1 = finalY - m * (finalX - x1);
                 newPoint.setX(x1);
                 newPoint.setY(y1);
-                initialCodedPoint.setRightRegionCode(false);
+                finalCodedPoint.setRightRegionCode(false);
                 _line.setFinalPoint(newPoint);
             }
             
@@ -204,7 +205,7 @@ void ViewportWindow::clipLine(Line _line) {
                 x1 = finalX - ((finalY - y1) / m);
                 newPoint.setX(x1);
                 newPoint.setY(y1);
-                initialCodedPoint.setBottomRegionCode(false);
+                finalCodedPoint.setBottomRegionCode(false);
                 _line.setFinalPoint(newPoint);
             }
             
@@ -221,7 +222,7 @@ void ViewportWindow::clipLine(Line _line) {
                 x1 = finalX - ((finalY - y1) / m);
                 newPoint.setX(x1);
                 newPoint.setY(y1);
-                initialCodedPoint.setTopRegionCode(false);
+                finalCodedPoint.setTopRegionCode(false);
                 _line.setFinalPoint(newPoint);
             }
         }

@@ -91,7 +91,7 @@ void viewportDemo() {
     Line line1 = Line::generateLineDDA(a, b);       // all inside
     Line line2 = Line::generateLineDDA(c, e);    // all outside
     Line line3 = Line::generateLineDDA(c, b);   // partially inside
-//    Line line4 = Line::generateLineDDA(c, f);   // partially inside
+    Line line4 = Line::generateLineDDA(c, f);   // partially inside
     
     // Simulate the viewport borders
     Vertex2d topLeft(100.0f, 200.0f);
@@ -113,12 +113,12 @@ void viewportDemo() {
 //    line1.plotPoints();
 //    line2.plotPoints();
 //    line3.plotPoints();
-//    line4.plotPoints();
+      line4.plotPoints();
     
-    vpw.clipLine(line1);
-    vpw.clipLine(line2);
-    vpw.clipLine(line3);
-//    vpw.clipLine(line4);
+//    vpw.clipLine(line1);
+//    vpw.clipLine(line2);
+//    vpw.clipLine(line3);
+      vpw.clipLine(line4);
 
     std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
     std::list<GeometricFigure*>::const_iterator it;
