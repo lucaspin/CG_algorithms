@@ -9,26 +9,6 @@
 
 using namespace std;
 
-// Acceptance - (initialRegionCode | finalRegionCode) == 0000
-bool ViewportWindow::clipLineAcceptanceTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint) {
-    vector<bool> falseVector = {false, false, false, false};
-    vector<bool> initialRegionCode = _initialPoint.getRegionCode();
-    vector<bool> finalRegionCode = _finalPoint.getRegionCode();
-    return ((initialRegionCode == falseVector) && (finalRegionCode == falseVector));
-}
-
-// Rejection - (initialRegionCode & finalRegionCode) != 0000
-bool ViewportWindow::clipLineRejectionTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint) {
-    vector<bool> initialRegionCode = _initialPoint.getRegionCode();
-    vector<bool> finalRegionCode = _finalPoint.getRegionCode();
-    for (int i = 0; i < initialRegionCode.size(); i++) {
-        if (initialRegionCode[i] && finalRegionCode[i]) {
-            return true;
-        }
-    }
-    return false;
-}
-
 /**
  * @constructor
  * @param _bottomLeftCorner {Vertex2d}
@@ -72,9 +52,49 @@ Vertex2d ViewportWindow::getTopRightCorner() {
 }
 
 /**
+ * Getter for the currently visible objects of the window.
+ * @return {list<GeometricFigure*>}
+ */
+std::list<GeometricFigure*> ViewportWindow::getVisibleObjects() {
+    return this->visibleObjects;
+}
+
+/**
+ * Method to determine if a line is entirely inside the viewport window.
+ * If that occurs, both of its points region codes should be 0000.
+ * @param _initialPoint {CodedVertex2d}
+ * @param _finalPoint {CodedVertex2d}
+ * @return {bool}
+ */
+bool ViewportWindow::clipLineAcceptanceTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint) {
+    vector<bool> falseVector = {false, false, false, false};
+    vector<bool> initialRegionCode = _initialPoint.getRegionCode();
+    vector<bool> finalRegionCode = _finalPoint.getRegionCode();
+    return ((initialRegionCode == falseVector) && (finalRegionCode == falseVector));
+}
+
+/**
+ * Method to determine if a line is entirely outside the viewport window.
+ * If that occurs, at least one region code from its points should be true.
+ * @param _initialPoint {CodedVertex2d}
+ * @param _finalPoint {CodedVertex2d}
+ * @return {bool}
+ */
+bool ViewportWindow::clipLineRejectionTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint) {
+    vector<bool> initialRegionCode = _initialPoint.getRegionCode();
+    vector<bool> finalRegionCode = _finalPoint.getRegionCode();
+    for (int i = 0; i < initialRegionCode.size(); i++) {
+        if (initialRegionCode[i] && finalRegionCode[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * This method encapsulate the clip pipeline stage
  * We pass different kinds of GeometricFigures (LINE, POLYGON, CIRCUMFERENCE)
- * and the methods redirect to the specific clip algorithm
+ * and the method redirects to the specific clipping algorithm.
  * @param _objects {list<GeometricFigure>}
  */
 void ViewportWindow::clip(list<GeometricFigure> _objects) {
@@ -104,12 +124,11 @@ void ViewportWindow::clip(list<GeometricFigure> _objects) {
 }
 
 /**
- * This is a line clipping method that uses the Cohen-Sutherland algorithm
+ * This is a line clipping method that uses the Cohen-Sutherland algorithm.
+ * This method is temporally public for testing purposes.
  * @param _line {Line}
  */
-// This method is temporally public for testing purposes
 void ViewportWindow::clipLine(Line _line) {
-    // references for the Viewport
     float xMin = this->getBottomLeftCorner().getX();
     float yMin = this->getBottomLeftCorner().getY();
     float xMax = this->getTopRightCorner().getX();
@@ -139,13 +158,11 @@ void ViewportWindow::clipLine(Line _line) {
     Vertex2d newPoint;
     
     while (!actionTaken) {
-        // Acceptance - (initialRegionCode | finalRegionCode) == 0000
         if (clipLineAcceptanceTest(initialCodedPoint, finalCodedPoint)) {
             visibleObjects.push_back(&_line);
             actionTaken = true;
         }
         
-        // Rejection - (initialRegionCode & finalRegionCode) != 0000
         if (!actionTaken && clipLineRejectionTest(initialCodedPoint, finalCodedPoint)) {
             actionTaken = true;
         }
@@ -230,17 +247,12 @@ void ViewportWindow::clipLine(Line _line) {
 }
 
 /**
- * This is a polygon clipping method that uses the Sutherland-Hodgman algorithm
- * This only work for filled concave polygons
- * Convex polygons need to be converted to 2 or more concave polygons through
- * another method (not implemented)
+ * This is a polygon clipping method that uses the Sutherland-Hodgman algorithm.
+ * This only work for filled convex polygons.
+ * Concave polygons need to be converted to 2 or more concave polygons through
+ * another method (not implemented).
  * @param _polygon {Polygon}
  */
 void ViewportWindow::clipPolygon(Polygon _polygon) {
     // TODO
 }
-
-std::list<GeometricFigure*> ViewportWindow::getVisibleObjects() {
-    return this->visibleObjects;
-}
-
