@@ -70,34 +70,65 @@ void onDisplay() {
     glMatrixMode(GL_PROJECTION);
     
     viewportDemo();
-    transformationDemo();
+//    transformationDemo();
     
     glFlush();
     glutSwapBuffers();
 }
 
 void viewportDemo() {
-    Vertex2d bottomLeftCorner(0.0f, 0.0f);
-    Vertex2d topRightCorner(100.0f, 100.0f);
-    ViewportWindow  vpw(bottomLeftCorner, topRightCorner);
-    Line line1(1.0f, 1.0f, 99.0f, 99.0f);       // all inside
-    Line line2(-1.0f, -1.0f, 101.0f, -1.0f);    // all outside
-    Line line3(-10.0f, 70.0f, 50.0f, 105.0f);   // partially inside
-    Line line4(-10.0f, 40.0f, 110.0f, 50.0f);   // partially inside
-    //Line line5(-10.0f, 40.0f, 110.0f, 40.0f);       // partially inside (horizontal line)
-    //Line line6(30.0f, -10.0f, 30.0f, 110.0f);       // partially inside (vertical line)
-//    list<GeometricFigure> lineList;
-//    lineList.push_back(line1);
-//    lineList.push_back(line2);
-//    lineList.push_back(line3);
-//    lineList.push_back(line4);
-    //lineList.push_back(line5);
-    //lineList.push_back(line6);
-//    vpw.clip(lineList);
+    Vertex2d bottomLeftCorner(100.0f, 100.0f);
+    Vertex2d topRightCorner(200.0f, 200.0f);
+    ViewportWindow vpw(bottomLeftCorner, topRightCorner);
+    
+    Vertex2d a(120.0f, 120.0f);
+    Vertex2d b(150.0f, 150.0f);
+    Vertex2d c(50.0f, 170.0f);
+    Vertex2d d(140.0f, 250.0f);
+    Vertex2d e(60.0f, 300.0f);
+    Vertex2d f(250.0f, 190.0f);
+    
+    Line line1 = Line::generateLineDDA(a, b);       // all inside
+    Line line2 = Line::generateLineDDA(c, e);    // all outside
+    Line line3 = Line::generateLineDDA(c, b);   // partially inside
+//    Line line4 = Line::generateLineDDA(c, f);   // partially inside
+    
+    // Simulate the viewport borders
+    Vertex2d topLeft(100.0f, 200.0f);
+    Vertex2d topRight(200.0f, 200.0f);
+    Vertex2d bottomLeft(100.0f, 100.0f);
+    Vertex2d bottomRight(200.0f, 100.0f);
+    Line topLine = Line::generateLineDDA(topLeft, topRight);
+    Line bottomLine = Line::generateLineDDA(bottomLeft, bottomRight);
+    Line leftLine = Line::generateLineDDA(bottomLeft, topLeft);
+    Line rightLine = Line::generateLineDDA(bottomRight, topRight);
+    
+    // Print the viewport
+    topLine.GeometricFigure::plotPoints();
+    bottomLine.GeometricFigure::plotPoints();
+    leftLine.GeometricFigure::plotPoints();
+    rightLine.GeometricFigure::plotPoints();
+    
+    // Print the lines without clipping
+//    line1.plotPoints();
+//    line2.plotPoints();
+//    line3.plotPoints();
+//    line4.plotPoints();
+    
     vpw.clipLine(line1);
     vpw.clipLine(line2);
     vpw.clipLine(line3);
-    vpw.clipLine(line4);
+//    vpw.clipLine(line4);
+
+    std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
+    std::list<GeometricFigure*>::const_iterator it;
+    
+    for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
+        Vertex2d initialPoint = static_cast<Line*>(*it)->getInitialPoint();
+        Vertex2d finalPoint = static_cast<Line*>(*it)->getFinalPoint();
+        Line line = Line::generateLineDDA(initialPoint, finalPoint);
+        line.GeometricFigure::plotPoints();
+    }
 }
 
 void transformationDemo() {

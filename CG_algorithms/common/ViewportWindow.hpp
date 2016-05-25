@@ -19,7 +19,7 @@ class ViewportWindow {
 private:
     Vertex2d bottomLeftCorner;
     Vertex2d topRightCorner;
-    std::list<GeometricFigure> visibleObjects;
+    std::list<GeometricFigure*> visibleObjects;
     bool clipLineAcceptanceTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
     bool clipLineRejectionTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
 public:
@@ -28,6 +28,7 @@ public:
     void setTopRightCorner(Vertex2d _TopRightCorner);
     Vertex2d getBottomLeftCorner();
     Vertex2d getTopRightCorner();
+    std::list<GeometricFigure*> getVisibleObjects();
     // Method to make a triage of primites that will be clipped
     void clip(std::list<GeometricFigure> _objects);
     // Cohen-Sutherland algorithm to clip lines

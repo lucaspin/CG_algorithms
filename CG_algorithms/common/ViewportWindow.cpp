@@ -116,166 +116,115 @@ void ViewportWindow::clipLine(Line _line) {
     float yMax = this->getTopRightCorner().getY();
     
     // determining the regionCode for the first line point
-    float x1 = _line.getInitialPoint().getX();
-    float y1 = _line.getInitialPoint().getY();
+    float initialX = _line.getInitialPoint().getX();
+    float initialY = _line.getInitialPoint().getY();
     
-    CodedVertex2d initialPoint(x1, y1);
-    if (y1 > yMax) initialPoint.setTopRegionCode(true);
-    if (y1 < yMin) initialPoint.setBottomRegionCode(true);
-    if (x1 > xMax) initialPoint.setRightRegionCode(true);
-    if (x1 < xMin) initialPoint.setLeftRegionCode(true);
+    CodedVertex2d initialCodedPoint(initialX, initialY);
+    if (initialY > yMax) initialCodedPoint.setTopRegionCode(true);
+    if (initialY < yMin) initialCodedPoint.setBottomRegionCode(true);
+    if (initialX > xMax) initialCodedPoint.setRightRegionCode(true);
+    if (initialX < xMin) initialCodedPoint.setLeftRegionCode(true);
     
     // determining the regionCode for the last line point
-    float x2 = _line.getFinalPoint().getX();
-    float y2 = _line.getFinalPoint().getY();
+    float finalX = _line.getFinalPoint().getX();
+    float finalY = _line.getFinalPoint().getY();
     
-    CodedVertex2d finalPoint(x2, y2);
-    if (y2 > yMax) finalPoint.setTopRegionCode(true);
-    if (y2 < yMin) finalPoint.setBottomRegionCode(true);
-    if (x2 > xMax) finalPoint.setRightRegionCode(true);
-    if (x2 < xMin) finalPoint.setLeftRegionCode(true);
+    CodedVertex2d finalCodedPoint(finalX, finalY);
+    if (finalY > yMax) finalCodedPoint.setTopRegionCode(true);
+    if (finalY < yMin) finalCodedPoint.setBottomRegionCode(true);
+    if (finalX > xMax) finalCodedPoint.setRightRegionCode(true);
+    if (finalX < xMin) finalCodedPoint.setLeftRegionCode(true);
     
-    vector<bool> falseVector = {false, false, false, false};
-    vector<bool> initialRegionCode = initialPoint.getRegionCode();
-    vector<bool> finalRegionCode = finalPoint.getRegionCode();
+    bool actionTaken = false;
+    Vertex2d newPoint;
     
-    //Acceptance - (initialRegionCode | finalRegionCode) == 0000
-    if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-        visibleObjects.push_back(_line);
-        return;
-    }
-    
-    // Rejection - (initialRegionCode & finalRegionCode) != 0000
-    if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    
-    /* After this Acceptance and Rejection tests above, we still have two possible scenarios:
-    * Line (still) tottaly outside OR crossing the Viewport
-    * (intersections need to be determined)
-    */
-    
-    // (angular coefficient) m = deltaY/deltaX
-    float m = (yMax - yMin)/(xMax - xMin);
-    // reference for the clippedPoint
-    Vertex2d clippedPoint;
-    float x, y;
-    
-    // Doubt: which point will be clipped?
-    //left limit clipping
-    x = xMin;
-    if (initialPoint.getLeftRegionCode()) {
-        y = y1 + m * (x - x1);
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setInitialPoint(clippedPoint);
-        initialPoint.setLeftRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
+    while (!actionTaken) {
+        // Acceptance - (initialRegionCode | finalRegionCode) == 0000
+        if (clipLineAcceptanceTest(initialCodedPoint, finalCodedPoint)) {
+            visibleObjects.push_back(&_line);
+            actionTaken = true;
         }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
-    if (finalPoint.getLeftRegionCode()) {
-        y = y1 - m * (x2 - x);
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setFinalPoint(clippedPoint);
-        finalPoint.setLeftRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
+        
+        // Rejection - (initialRegionCode & finalRegionCode) != 0000
+        if (!actionTaken && clipLineRejectionTest(initialCodedPoint, finalCodedPoint)) {
+            actionTaken = true;
         }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
-    // call Acceptance and Rejection
-    
-    
-    // right limit clipping
-    x = xMax;
-    if (initialPoint.getRightRegionCode()) {
-        y = y1 + m * (x - x1);
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setInitialPoint(clippedPoint);
-        initialPoint.setRightRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
+        
+        if (!actionTaken) {
+            // Calculate the intersection
+            float m = (finalY - initialY) / (finalX - initialX);
+            float x1, y1;
+            
+            // TODO: figure out a better way to do this clipping
+            
+            // Left Clipping
+            if (initialCodedPoint.getLeftRegionCode()) {
+                x1 = xMin;
+                y1 = finalY - m * (finalX - x1);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setLeftRegionCode(false);
+                _line.setInitialPoint(newPoint);
+            } else if (finalCodedPoint.getLeftRegionCode()) {
+                x1 = xMin;
+                y1 = finalY - m * (finalX - x1);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setLeftRegionCode(false);
+                _line.setFinalPoint(newPoint);
+            }
+            
+            // Right Clipping
+            if (initialCodedPoint.getRightRegionCode()) {
+                x1 = xMax;
+                y1 = finalY - m * (finalX - x1);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setRightRegionCode(false);
+                _line.setInitialPoint(newPoint);
+            } else if (finalCodedPoint.getRightRegionCode()) {
+                x1 = xMax;
+                y1 = finalY - m * (finalX - x1);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setRightRegionCode(false);
+                _line.setFinalPoint(newPoint);
+            }
+            
+            // Bottom Clipping
+            if (initialCodedPoint.getBottomRegionCode()) {
+                y1 = yMin;
+                x1 = finalX - ((finalY - y1) / m);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setBottomRegionCode(false);
+                _line.setInitialPoint(newPoint);
+            } else if (finalCodedPoint.getBottomRegionCode()) {
+                y1 = yMin;
+                x1 = finalX - ((finalY - y1) / m);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setBottomRegionCode(false);
+                _line.setFinalPoint(newPoint);
+            }
+            
+            // Top Clipping
+            if (initialCodedPoint.getTopRegionCode()) {
+                y1 = yMax;
+                x1 = finalX - ((finalY - y1) / m);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setTopRegionCode(false);
+                _line.setInitialPoint(newPoint);
+            } else if (finalCodedPoint.getTopRegionCode()) {
+                y1 = yMax;
+                x1 = finalX - ((finalY - y1) / m);
+                newPoint.setX(x1);
+                newPoint.setY(y1);
+                initialCodedPoint.setTopRegionCode(false);
+                _line.setFinalPoint(newPoint);
+            }
         }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
-    if (finalPoint.getRightRegionCode()) {
-        y = y1 - m * (x2 - x);
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setInitialPoint(clippedPoint);
-        finalPoint.setRightRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
-        }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
-    
-    // bottom limit clipping
-    y = yMin;
-    if (initialPoint.getBottomRegionCode()) {
-        x = x2 - (y2 - y)/m;
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setInitialPoint(clippedPoint);
-        initialPoint.setBottomRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
-        }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    if (finalPoint.getBottomRegionCode()) {
-        x = x1 + (y - y1)/m;
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setFinalPoint(clippedPoint);
-        finalPoint.setBottomRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
-        }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
-    }
-    
-    // top limit clipping
-    y = yMax;
-    if (initialPoint.getTopRegionCode()) {
-        x = x2 - (y2 - y)/m;
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setInitialPoint(clippedPoint);
-        initialPoint.setTopRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
-        }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    if (finalPoint.getTopRegionCode()) {
-        x = x1 + (y - y1)/m;
-        clippedPoint.setX(x);
-        clippedPoint.setY(y);
-        _line.setFinalPoint(clippedPoint);
-        finalPoint.setTopRegionCode(false);
-        // Acceptance or Rejection
-        if (clipLineAcceptanceTest(initialPoint, finalPoint)) {
-            visibleObjects.push_back(_line);
-            return;
-        }
-        if (clipLineRejectionTest(initialPoint, finalPoint)) {return;}
-    }
     }
 }
 
@@ -288,5 +237,9 @@ void ViewportWindow::clipLine(Line _line) {
  */
 void ViewportWindow::clipPolygon(Polygon _polygon) {
     // TODO
+}
+
+std::list<GeometricFigure*> ViewportWindow::getVisibleObjects() {
+    return this->visibleObjects;
 }
 

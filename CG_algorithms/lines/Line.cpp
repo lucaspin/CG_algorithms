@@ -11,6 +11,7 @@
 #include "../common/Vertex2d.hpp"
 #include "../2D_transformations/TransformationMatrix.hpp"
 #include "../2D_transformations/Matrix2d.hpp"
+#include "../common/ViewportWindow.hpp"
 
 using namespace std;
 
