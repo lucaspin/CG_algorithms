@@ -107,6 +107,7 @@ void ViewportWindow::clip(list<GeometricFigure> _objects) {
  * This is a line clipping method that uses the Cohen-Sutherland algorithm
  * @param _line {Line}
  */
+// This method is temporally public for testing purposes
 void ViewportWindow::clipLine(Line _line) {
     // references for the Viewport
     float xMin = this->getBottomLeftCorner().getX();

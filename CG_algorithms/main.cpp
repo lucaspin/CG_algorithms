@@ -82,19 +82,22 @@ void viewportDemo() {
     ViewportWindow  vpw(bottomLeftCorner, topRightCorner);
     Line line1(1.0f, 1.0f, 99.0f, 99.0f);       // all inside
     Line line2(-1.0f, -1.0f, 101.0f, -1.0f);    // all outside
-    Line line3(-10.0f, 70.0f, 50.0f, 105.0f);       // partially inside
-    Line line4(-10.0f, 40.0f, 110.0f, 50.0f);       // partially inside
+    Line line3(-10.0f, 70.0f, 50.0f, 105.0f);   // partially inside
+    Line line4(-10.0f, 40.0f, 110.0f, 50.0f);   // partially inside
     //Line line5(-10.0f, 40.0f, 110.0f, 40.0f);       // partially inside (horizontal line)
     //Line line6(30.0f, -10.0f, 30.0f, 110.0f);       // partially inside (vertical line)
-    list<GeometricFigure> lineList;
-    lineList.push_back(line1);
-    lineList.push_back(line2);
-    lineList.push_back(line3);
-    lineList.push_back(line4);
+//    list<GeometricFigure> lineList;
+//    lineList.push_back(line1);
+//    lineList.push_back(line2);
+//    lineList.push_back(line3);
+//    lineList.push_back(line4);
     //lineList.push_back(line5);
     //lineList.push_back(line6);
-    vpw.clip(lineList);
-    
+//    vpw.clip(lineList);
+    vpw.clipLine(line1);
+    vpw.clipLine(line2);
+    vpw.clipLine(line3);
+    vpw.clipLine(line4);
 }
 
 void transformationDemo() {

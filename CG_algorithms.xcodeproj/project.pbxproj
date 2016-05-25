@@ -20,6 +20,8 @@
 		1BD97F081CD3CD7D00BECC5D /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F061CD3CD7D00BECC5D /* Polygon.cpp */; };
 		1BD97F0B1CD3D08D00BECC5D /* Line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F091CD3D08D00BECC5D /* Line.cpp */; };
 		1BD97F0E1CD3DC8C00BECC5D /* Circumference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */; };
+		5CC67CAB1CE2B0B4007403E5 /* CodedVertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CC67CA91CE2B0B4007403E5 /* CodedVertex2d.cpp */; };
+		5CC67CB11CE2B811007403E5 /* ViewportWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CC67CAF1CE2B811007403E5 /* ViewportWindow.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +60,10 @@
 		1BD97F0A1CD3D08D00BECC5D /* Line.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Line.hpp; sourceTree = "<group>"; };
 		1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circumference.cpp; sourceTree = "<group>"; };
 		1BD97F0D1CD3DC8C00BECC5D /* Circumference.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Circumference.hpp; sourceTree = "<group>"; };
+		5CC67CA91CE2B0B4007403E5 /* CodedVertex2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CodedVertex2d.cpp; sourceTree = "<group>"; };
+		5CC67CAA1CE2B0B4007403E5 /* CodedVertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CodedVertex2d.hpp; sourceTree = "<group>"; };
+		5CC67CAF1CE2B811007403E5 /* ViewportWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewportWindow.cpp; sourceTree = "<group>"; };
+		5CC67CB01CE2B811007403E5 /* ViewportWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ViewportWindow.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +142,10 @@
 				1B5C3B6A1CD4538E0044A700 /* Vertex2d.hpp */,
 				1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */,
 				1B5C3B6D1CD456820044A700 /* GeometricFigure.hpp */,
+				5CC67CA91CE2B0B4007403E5 /* CodedVertex2d.cpp */,
+				5CC67CAA1CE2B0B4007403E5 /* CodedVertex2d.hpp */,
+				5CC67CAF1CE2B811007403E5 /* ViewportWindow.cpp */,
+				5CC67CB01CE2B811007403E5 /* ViewportWindow.hpp */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -209,10 +219,12 @@
 			files = (
 				1BD97F0B1CD3D08D00BECC5D /* Line.cpp in Sources */,
 				1BD97F081CD3CD7D00BECC5D /* Polygon.cpp in Sources */,
+				5CC67CAB1CE2B0B4007403E5 /* CodedVertex2d.cpp in Sources */,
 				1B7378E71CCAE4A400EF9890 /* TransformationMatrix.cpp in Sources */,
 				1BD97F0E1CD3DC8C00BECC5D /* Circumference.cpp in Sources */,
 				1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */,
 				1B5C3B6E1CD456820044A700 /* GeometricFigure.cpp in Sources */,
+				5CC67CB11CE2B811007403E5 /* ViewportWindow.cpp in Sources */,
 				1B7378E41CCAE45F00EF9890 /* Matrix2d.cpp in Sources */,
 				1B2BFFC71CC3F34A0037C1DE /* main.cpp in Sources */,
 				1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */,
