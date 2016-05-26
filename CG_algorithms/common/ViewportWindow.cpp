@@ -248,7 +248,7 @@ void ViewportWindow::clipLine(Line _line) {
 
 /**
  * This is a polygon clipping method that uses the Sutherland-Hodgman algorithm.
- * This only work for filled convex polygons.
+ * This only work for convex polygons.
  * Concave polygons need to be converted to 2 or more concave polygons through
  * another method (not implemented).
  * @param _polygon {Polygon}
@@ -263,23 +263,48 @@ void ViewportWindow::clipPolygon(Polygon _polygon) {
     std::list<Vertex2d>::const_iterator it;
     std::list<CodedVertex2d> listCodedVertex2d;
     
-    // converting Vertex2d in CodedVertex2d, and determining the regionCode
+    // converting list<Vertex2d> in list<CodedVertex2d>, and determining the regionCodes
     for (it = listPolygon.begin(); it != listPolygon.end(); it++) {
-    
-//        CodedVertex2d initialCodedPoint(initialX, initialY);
-//        float initialX = _line.getInitialPoint().getX();
-//        float initialY = _line.getInitialPoint().getY();
-        
-//        if (initialY > yMax) initialCodedPoint.setTopRegionCode(true);
-//        if (initialY < yMin) initialCodedPoint.setBottomRegionCode(true);
-//        if (initialX > xMax) initialCodedPoint.setRightRegionCode(true);
-//        if (initialX < xMin) initialCodedPoint.setLeftRegionCode(true);
+        auto vertex = *it;
+        float x = vertex.getX();
+        float y = vertex.getY();
+        CodedVertex2d tempCodedPoint(vertex.getX(), vertex.getY());
+        if (y > yMax) tempCodedPoint.setTopRegionCode(true);
+        if (y < yMin) tempCodedPoint.setBottomRegionCode(true);
+        if (x > xMax) tempCodedPoint.setRightRegionCode(true);
+        if (x < xMin) tempCodedPoint.setLeftRegionCode(true);
+        listCodedVertex2d.push_back(tempCodedPoint);
     }
     
+    std::list<CodedVertex2d>::const_iterator itCoded;
     
+    for (itCoded = listCodedVertex2d.begin(); itCoded != listCodedVertex2d.end(); itCoded++) {
+        auto nextVertice = next(itCoded);
+        if (nextVertice == listCodedVertex2d.end()) {nextVertice = listCodedVertex2d.begin();}
+
+        //bool actionTaken = false;
+        //Vertex2d newPoint;
+        
+        // while (!actionTaken) {
+        //if (clipLineAcceptanceTest(*itCoded, *nextVertice)) {
+                //actionTaken = true;
+                //   }
+            if (/*!actionTaken && */clipLineRejectionTest(*itCoded, *nextVertice)) {
+                listCodedVertex2d.erase(itCoded, nextVertice);
+                //actionTaken = true;
+            }
+        // }
+    }
     
+    std::list<Vertex2d>listClippedVertex2d;
     
-    
-    
-    
+    // converting list<CodedVertex2d> in list<Vertex2d> to output polygon
+    for (itCoded = listCodedVertex2d.begin(); itCoded != listCodedVertex2d.end(); itCoded++) {
+        auto tempCodedVertex2d = *itCoded;
+        Vertex2d tempVertex2d(tempCodedVertex2d.getX(), tempCodedVertex2d.getY());
+        listClippedVertex2d.push_back(tempVertex2d);
+    }
+
+    Polygon clippedPolygon = *new Polygon(listClippedVertex2d);
+    visibleObjects.push_back(&clippedPolygon);
 }

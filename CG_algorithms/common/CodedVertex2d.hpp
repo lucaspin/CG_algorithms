@@ -13,7 +13,7 @@
 #include "Vertex2d.hpp"
 #include <vector>
 
-class CodedVertex2d : Vertex2d {
+class CodedVertex2d : public Vertex2d {
 private:
     std::vector<bool> regionCode;
 public:
@@ -28,6 +28,6 @@ public:
     bool getTopRegionCode();
     bool getBottomRegionCode();
     bool getRightRegionCode();
-    bool getLeftRegionCode();
+    bool getLeftRegionCode();    
 };
 #endif /* CodedVertex2d_hpp */

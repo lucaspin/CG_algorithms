@@ -100,13 +100,13 @@ void viewportClipLineDemo() {
     Vertex2d topRight(200.0f, 200.0f);
     Vertex2d bottomLeft(100.0f, 100.0f);
     Vertex2d bottomRight(200.0f, 100.0f);
-    list<Vertex2d> listPoligonViewPort;
-    listPoligonViewPort.push_back(topLeft);
-    listPoligonViewPort.push_back(bottomLeft);
-    listPoligonViewPort.push_back(bottomRight);
-    listPoligonViewPort.push_back(topRight);
-    Polygon poligonViewPort = Polygon::generateNotFilledPolygon(listPoligonViewPort);
-    poligonViewPort.GeometricFigure::plotPoints();
+    list<Vertex2d> listPolygonViewPort;
+    listPolygonViewPort.push_back(topLeft);
+    listPolygonViewPort.push_back(bottomLeft);
+    listPolygonViewPort.push_back(bottomRight);
+    listPolygonViewPort.push_back(topRight);
+    Polygon polygonViewPort = Polygon::generateNotFilledPolygon(listPolygonViewPort);
+    polygonViewPort.GeometricFigure::plotPoints();
 
     vpw.clipLine(line1);
     vpw.clipLine(line2);
@@ -114,8 +114,8 @@ void viewportClipLineDemo() {
     vpw.clipLine(line4);
     
     //translating the "ViewPort" just for simulating the before and after clipping
-    poligonViewPort.translate(0.0f, 150.0f);
-    poligonViewPort.GeometricFigure::plotPoints();
+    polygonViewPort.translate(0.0f, 150.0f);
+    polygonViewPort.GeometricFigure::plotPoints();
     
     // Print the lines without clipping
     line1.translate(0.0f, 150.0f);
@@ -144,16 +144,22 @@ void viewportClipPolygonDemo() {
     Vertex2d topRight(400.0f, 200.0f);
     Vertex2d bottomLeft(300.0f, 100.0f);
     Vertex2d bottomRight(400.0f, 100.0f);
-    Line topLine = Line::generateLineDDA(topLeft, topRight);
-    Line bottomLine = Line::generateLineDDA(bottomLeft, bottomRight);
-    Line leftLine = Line::generateLineDDA(bottomLeft, topLeft);
-    Line rightLine = Line::generateLineDDA(bottomRight, topRight);
+    list<Vertex2d> listPolygonViewPort;
+    listPolygonViewPort.push_back(topLeft);
+    listPolygonViewPort.push_back(bottomLeft);
+    listPolygonViewPort.push_back(bottomRight);
+    listPolygonViewPort.push_back(topRight);
+    Polygon polygonViewPort = Polygon::generateNotFilledPolygon(listPolygonViewPort);
+    polygonViewPort.GeometricFigure::plotPoints();
     
-    // Print the viewport
-    topLine.GeometricFigure::plotPoints();
-    bottomLine.GeometricFigure::plotPoints();
-    leftLine.GeometricFigure::plotPoints();
-    rightLine.GeometricFigure::plotPoints();
+    //translating the "ViewPort" just for simulating the before and after clipping
+    polygonViewPort.translate(0.0f, 150.0f);
+    polygonViewPort.GeometricFigure::plotPoints();
+    
+    // The ViewPort itslef
+    Vertex2d bottomLeftCorner(300.0f, 100.0f);
+    Vertex2d topRightCorner(400.0f, 200.0f);
+    ViewportWindow vpw(bottomLeftCorner, topRightCorner);
 
     // Draw some polygons
     Vertex2d a(320.0f, 120.0f);
@@ -161,22 +167,30 @@ void viewportClipPolygonDemo() {
     Vertex2d c(350.0f, 230.0f);
     Vertex2d d(430.0f, 150.0f);
     
-    list<Vertex2d> listPoligonViewPort;
-    listPoligonViewPort.push_back(topLeft);
-    listPoligonViewPort.push_back(bottomLeft);
-    listPoligonViewPort.push_back(bottomRight);
-    listPoligonViewPort.push_back(topRight);
-    Polygon poligonViewPort = Polygon::generateNotFilledPolygon(listPoligonViewPort);
-    
-//    Vertex2d e(60.0f, 300.0f);POlygoon
-//    Vertex2d f(250.0f, 190.0f);
     list<Vertex2d> listPolygon1;
     listPolygon1.push_back(a);
     listPolygon1.push_back(b);
     listPolygon1.push_back(c);
     listPolygon1.push_back(d);
-    Polygon poligon1 = Polygon::generateFilledPolygon(listPolygon1);
-    poligon1.GeometricFigure::plotPoints();
+    Polygon polygon1 = Polygon::generateFilledPolygon(listPolygon1);
+    polygon1.GeometricFigure::plotPoints();
+    
+    // translating the polygon1 (test) for up and down
+    polygon1.translate(0.0f, 150.0f);
+    polygon1.GeometricFigure::plotPoints();
+    polygon1.translate(0.0f, -150.0f);
+    
+    vpw.clipPolygon(polygon1);
+    
+    std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
+    std::list<GeometricFigure*>::const_iterator it;
+    
+    // TODO not Working
+    for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
+        Polygon *tempPolygon = static_cast<Polygon*>(*it);
+        tempPolygon->GeometricFigure::plotPoints();
+    }
+    
 }
 
 void transformationDemo() {
