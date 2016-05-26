@@ -168,7 +168,7 @@ void Polygon::applyTransformationMatrix(Matrix2d transformationMatrix) {
     
     // Create a new polygon with the new vertices
     // TODO change this rendering method
-    Polygon newPolygon = Polygon::generateFilledPolygon(newVerticeList);
+    Polygon newPolygon = Polygon::generateNotFilledPolygon(newVerticeList);
     
     // Set the new properties
     this->setVerticesList(newVerticeList);

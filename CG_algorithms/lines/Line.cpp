@@ -167,12 +167,12 @@ void Line::setInitialPoint(Vertex2d newInitialPoint) {
 }
 
 void Line::applyTransformationMatrix(Matrix2d transformationMatrix) {
-    // Cslculate the new points
+    // Calculate the new points
     Vertex2d newInitialPoint = transformationMatrix * this->getInitialPoint();
     Vertex2d newFinalPoint = transformationMatrix * this->getFinalPoint();
     
     // Generate a new line
-    Line newLine = generateLineBresenham(newInitialPoint, newFinalPoint);
+    Line newLine = generateLineDDA(newInitialPoint, newFinalPoint);
     
     // Set the new points
     this->setInitialPoint(newInitialPoint);

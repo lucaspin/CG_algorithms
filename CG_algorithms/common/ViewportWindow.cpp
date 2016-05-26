@@ -254,5 +254,32 @@ void ViewportWindow::clipLine(Line _line) {
  * @param _polygon {Polygon}
  */
 void ViewportWindow::clipPolygon(Polygon _polygon) {
-    // TODO
+    float xMin = this->getBottomLeftCorner().getX();
+    float yMin = this->getBottomLeftCorner().getY();
+    float xMax = this->getTopRightCorner().getX();
+    float yMax = this->getTopRightCorner().getY();
+    
+    std::list<Vertex2d> listPolygon = _polygon.getVerticesList();
+    std::list<Vertex2d>::const_iterator it;
+    std::list<CodedVertex2d> listCodedVertex2d;
+    
+    // converting Vertex2d in CodedVertex2d, and determining the regionCode
+    for (it = listPolygon.begin(); it != listPolygon.end(); it++) {
+    
+//        CodedVertex2d initialCodedPoint(initialX, initialY);
+//        float initialX = _line.getInitialPoint().getX();
+//        float initialY = _line.getInitialPoint().getY();
+        
+//        if (initialY > yMax) initialCodedPoint.setTopRegionCode(true);
+//        if (initialY < yMin) initialCodedPoint.setBottomRegionCode(true);
+//        if (initialX > xMax) initialCodedPoint.setRightRegionCode(true);
+//        if (initialX < xMin) initialCodedPoint.setLeftRegionCode(true);
+    }
+    
+    
+    
+    
+    
+    
+    
 }

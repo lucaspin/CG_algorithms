@@ -107,18 +107,25 @@ void viewportClipLineDemo() {
     listPoligonViewPort.push_back(topRight);
     Polygon poligonViewPort = Polygon::generateNotFilledPolygon(listPoligonViewPort);
     poligonViewPort.GeometricFigure::plotPoints();
-    poligonViewPort.translate(0.0f, 150.0f);
-    
-    // Print the lines without clipping
-//    line1.plotPoints();
-//    line2.plotPoints();
-//    line3.plotPoints();
-//    line4.plotPoints();
-    
+
     vpw.clipLine(line1);
     vpw.clipLine(line2);
     vpw.clipLine(line3);
     vpw.clipLine(line4);
+    
+    //translating the "ViewPort" just for simulating the before and after clipping
+    poligonViewPort.translate(0.0f, 150.0f);
+    poligonViewPort.GeometricFigure::plotPoints();
+    
+    // Print the lines without clipping
+    line1.translate(0.0f, 150.0f);
+    line2.translate(0.0f, 150.0f);
+    line3.translate(0.0f, 150.0f);
+    line4.translate(0.0f, 150.0f);
+    line1.plotPoints();
+    line2.plotPoints();
+    line3.plotPoints();
+    line4.plotPoints();
 
     std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
     std::list<GeometricFigure*>::const_iterator it;
