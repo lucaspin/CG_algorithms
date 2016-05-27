@@ -12,6 +12,14 @@ using namespace std;
 
 /**
  * Constructor of the class
+ */
+CodedVertex2d::CodedVertex2d():Vertex2d() {
+    vector<bool> regionCode = {false, false, false, false};
+    this->setRegionCode(regionCode);
+}
+
+/**
+ * Constructor of the class
  * @param {float x}
  * @param {float y}
  * @param {float z}
@@ -110,4 +118,13 @@ bool CodedVertex2d::getRightRegionCode() {
  */
 bool CodedVertex2d::getLeftRegionCode() {
     return this->regionCode[3];
+}
+
+/**
+ * Get a region code by its index
+ * @param index {int}
+ * @return {bool} the region code for the specified index 
+ */
+bool CodedVertex2d::getRegionCodeByIndex(int index) {
+    return this->regionCode[index];
 }

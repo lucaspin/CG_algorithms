@@ -9,7 +9,6 @@
 #ifndef CodedVertex2d_hpp
 #define CodedVertex2d_hpp
 
-#include "CodedVertex2d.hpp"
 #include "Vertex2d.hpp"
 #include <vector>
 
@@ -17,6 +16,7 @@ class CodedVertex2d : public Vertex2d {
 private:
     std::vector<bool> regionCode;
 public:
+    CodedVertex2d();
     CodedVertex2d(float x, float y, float z);
     CodedVertex2d(float x, float y);
     void setRegionCode(std::vector<bool> _regionCode);
@@ -28,6 +28,7 @@ public:
     bool getTopRegionCode();
     bool getBottomRegionCode();
     bool getRightRegionCode();
-    bool getLeftRegionCode();    
+    bool getLeftRegionCode();
+    bool getRegionCodeByIndex(int index);
 };
 #endif /* CodedVertex2d_hpp */

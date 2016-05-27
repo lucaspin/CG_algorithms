@@ -70,7 +70,7 @@ void onDisplay() {
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
-    viewportClipLineDemo();
+//    viewportClipLineDemo();
     viewportClipPolygonDemo();
     //    transformationDemo();
     
@@ -173,22 +173,22 @@ void viewportClipPolygonDemo() {
     listPolygon1.push_back(c);
     listPolygon1.push_back(d);
     Polygon polygon1 = Polygon::generateFilledPolygon(listPolygon1);
-    polygon1.GeometricFigure::plotPoints();
+//    polygon1.GeometricFigure::plotPoints();
     
     // translating the polygon1 (test) for up and down
     polygon1.translate(0.0f, 150.0f);
     polygon1.GeometricFigure::plotPoints();
     polygon1.translate(0.0f, -150.0f);
-    
     vpw.clipPolygon(polygon1);
-    
+
     std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
     std::list<GeometricFigure*>::const_iterator it;
     
     // TODO not Working
     for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
         Polygon *tempPolygon = static_cast<Polygon*>(*it);
-        tempPolygon->GeometricFigure::plotPoints();
+        Polygon newPolygon = Polygon::generateFilledPolygon(tempPolygon->getVerticesList());
+        newPolygon.GeometricFigure::plotPoints();
     }
     
 }

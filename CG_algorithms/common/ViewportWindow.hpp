@@ -22,6 +22,7 @@ private:
     std::list<GeometricFigure*> visibleObjects;
     bool clipLineAcceptanceTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
     bool clipLineRejectionTest(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint);
+    bool isEdgeTotallyInside(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint, int index);
 public:
     ViewportWindow(Vertex2d _bottomLeftCorner, Vertex2d topRightCorner);
     void setBottomLeftCorner(Vertex2d _bottomLeftCorner);

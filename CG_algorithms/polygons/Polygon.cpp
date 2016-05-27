@@ -28,6 +28,25 @@ Polygon::Polygon(list<Vertex2d> listOfVertices, bool filled):GeometricFigure() {
 }
 
 /**
+ * Constructor of the class
+ * @param listOfVertices {list<CodedVertex2d>}
+ * @param filled {bool} - whether the polygon is filled or not, default value is false
+ */
+Polygon::Polygon(list<CodedVertex2d> listOfVertices, bool filled):GeometricFigure() {
+    list<Vertex2d> newVertices;
+
+    // Convert the list of CodedVertex2d to a list of Vertex2d
+    for (auto it = listOfVertices.begin(); it != listOfVertices.end(); it++) {
+        Vertex2d newVertex(it->getX(), it->getY());
+        newVertices.push_back(newVertex);
+    }
+    
+    this->setVerticesList(newVertices);
+    GeometricFigure::setType(POLYGON);
+    this->setFilled(filled);
+}
+
+/**
  * Getter for filled attribute
  * @return {bool}
  */
