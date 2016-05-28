@@ -70,7 +70,7 @@ void onDisplay() {
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
     
-//    viewportClipLineDemo();
+    viewportClipLineDemo();
     viewportClipPolygonDemo();
     //    transformationDemo();
     
@@ -90,10 +90,10 @@ void viewportClipLineDemo() {
     Vertex2d e(60.0f, 300.0f);
     Vertex2d f(250.0f, 190.0f);
     
-    Line line1 = Line::generateLineDDA(a, b);       // all inside
+    Line line1 = Line::generateLineDDA(a, b);    // all inside
     Line line2 = Line::generateLineDDA(c, e);    // all outside
-    Line line3 = Line::generateLineDDA(c, b);   // partially inside
-    Line line4 = Line::generateLineDDA(c, f);   // partially inside
+    Line line3 = Line::generateLineDDA(c, b);    // partially inside
+    Line line4 = Line::generateLineDDA(c, f);    // partially inside
     
     // Simulate the viewport borders
     Vertex2d topLeft(100.0f, 200.0f);
@@ -163,10 +163,11 @@ void viewportClipPolygonDemo() {
 
     // Draw some polygons
     Vertex2d a(320.0f, 120.0f);
-    Vertex2d b(280.0f, 180.0f);
+    Vertex2d b(430.0f, 150.0f);
     Vertex2d c(350.0f, 230.0f);
-    Vertex2d d(430.0f, 150.0f);
+    Vertex2d d(310.0f, 180.0f);
     
+    // pushing in counter-clockwise orientation
     list<Vertex2d> listPolygon1;
     listPolygon1.push_back(a);
     listPolygon1.push_back(b);
@@ -184,7 +185,7 @@ void viewportClipPolygonDemo() {
     std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
     std::list<GeometricFigure*>::const_iterator it;
     
-    // TODO not Working
+    // Iterating and Plotting all objects in Viewport
     for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
         Polygon *tempPolygon = static_cast<Polygon*>(*it);
         Polygon newPolygon = Polygon::generateFilledPolygon(tempPolygon->getVerticesList());

@@ -344,6 +344,10 @@ void ViewportWindow::clipPolygon(Polygon _polygon) {
                     newInitialVertice.setX(x1);
                     newInitialVertice.setY(y1);
                     newVertices.push_back(newInitialVertice);
+                    // initialPoint outside, finalPoint inside ->  (intersection [calculated above], finalPoint)
+                    if (!nextVertice->getRegionCodeByIndex(counter)) {
+                        newVertices.push_back(*nextVertice);
+                    }
                 } else if (nextVertice->getRegionCodeByIndex(counter)) {
                     switch (counter) {
                         case 0: // Top clipping
