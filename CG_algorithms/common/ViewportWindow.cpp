@@ -247,12 +247,12 @@ void ViewportWindow::clipLine(Line _line) {
 }
 
 /**
- * Method that determines if a polygon edge is entirely inside the viewport.
+ * Method that determines if a polygon edge is entirely inside a SPECIFIC Limit (by its index) of the viewport.
  * @param _initialPoint {CodedVertex2d}
  * @param _finalPoint {CodedVertex2d}
- * @param index {int}
+ * @param index {int} - index of the RegionCode that will be checked (0 Top, 1 Bottom, 2 Right, 3 Left)
  */
-bool ViewportWindow::isEdgeTotallyInside(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint, int index) {
+bool ViewportWindow::isEdgeInsideLimitByIndex(CodedVertex2d _initialPoint, CodedVertex2d _finalPoint, int index) {
     return !(_initialPoint.getRegionCodeByIndex(index) || _finalPoint.getRegionCodeByIndex(index));
 }
 
@@ -304,7 +304,7 @@ void ViewportWindow::clipPolygon(Polygon _polygon) {
             }
             
             // If polygon's edge is not totally inside the viewport, we must calculate the intersect
-            if (!this->isEdgeTotallyInside(*it, *nextVertice, counter)) {
+            if (!this->isEdgeInsideLimitByIndex(*it, *nextVertice, counter)) {
                 CodedVertex2d newInitialVertice;
                 CodedVertex2d newFinalVertice;
                     
