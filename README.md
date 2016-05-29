@@ -8,19 +8,17 @@ The current algorithms present here are:
 - Bresenham algorithm for drawing lines and circles
 - Scan Line algorithm for filling polygons
 - 2D transformations
+- 2D Clipping (in ViewportWindows class)
+  - clipLine - Cohen-Sutherland algorithm
+  - clipPolygon - Hodgman-Sutherland algorithm
 
 ## TODO
 
-Implement 2D transformations
-
 - [ ] Implement function for mirroring
-
-Clipping
-
-- [x] Implement clipLine in ViewportWindows class - Cohen-Sutherland algorithm
-- [x] Implement clipPolygon in ViewportWindows class - Hodgman-Sutherland algorithm
 - [ ] review the ViewportWindow class (specially clip method)
-
+- [ ] review bugs in Bresenham algorithm
+- [ ] Implement 3D basic structures
+- 
 ## Authors
 
 Lucas Pinheiro @lucaspin<br>
