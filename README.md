@@ -18,7 +18,7 @@ The current algorithms present here are:
 - [ ] review the ViewportWindow class (specially clip method)
 - [ ] review bugs in Bresenham algorithm
 - [ ] Implement 3D basic structures
-- 
+
 ## Authors
 
 Lucas Pinheiro @lucaspin<br>
