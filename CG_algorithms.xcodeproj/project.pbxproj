@@ -11,8 +11,6 @@
 		1B2BFFD11CC3F4660037C1DE /* EdgesTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFCF1CC3F4660037C1DE /* EdgesTable.cpp */; };
 		1B2BFFD71CC3F4AD0037C1DE /* PolygonEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */; };
 		1B2BFFDB1CC3F6540037C1DE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */; };
-		1B2BFFDD1CC3F6690037C1DE /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */; };
-		1B2BFFDF1CC3F6800037C1DE /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */; };
 		1B5C3B6B1CD4538E0044A700 /* Vertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C3B691CD4538E0044A700 /* Vertex2d.cpp */; };
 		1B5C3B6E1CD456820044A700 /* GeometricFigure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */; };
 		1B7378E41CCAE45F00EF9890 /* Matrix2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B7378E21CCAE45F00EF9890 /* Matrix2d.cpp */; };
@@ -22,16 +20,19 @@
 		1BD97F0E1CD3DC8C00BECC5D /* Circumference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BD97F0C1CD3DC8C00BECC5D /* Circumference.cpp */; };
 		5CC67CAB1CE2B0B4007403E5 /* CodedVertex2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CC67CA91CE2B0B4007403E5 /* CodedVertex2d.cpp */; };
 		5CC67CB11CE2B811007403E5 /* ViewportWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CC67CAF1CE2B811007403E5 /* ViewportWindow.cpp */; };
+		A0202D711D203C970035DD48 /* libGLEW.1.13.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0202D701D203C970035DD48 /* libGLEW.1.13.0.dylib */; };
+		A0202D731D203CAF0035DD48 /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0202D721D203CAF0035DD48 /* libglut.3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1B2BFFC11CC3F34A0037C1DE /* CopyFiles */ = {
+		1B2BFFC11CC3F34A0037C1DE /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -44,8 +45,6 @@
 		1B2BFFD51CC3F4AD0037C1DE /* PolygonEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonEdge.cpp; sourceTree = "<group>"; };
 		1B2BFFD61CC3F4AD0037C1DE /* PolygonEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PolygonEdge.hpp; sourceTree = "<group>"; };
 		1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
-		1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
 		1B5C3B691CD4538E0044A700 /* Vertex2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex2d.cpp; sourceTree = "<group>"; };
 		1B5C3B6A1CD4538E0044A700 /* Vertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vertex2d.hpp; sourceTree = "<group>"; };
 		1B5C3B6C1CD456820044A700 /* GeometricFigure.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GeometricFigure.cpp; sourceTree = "<group>"; };
@@ -64,6 +63,8 @@
 		5CC67CAA1CE2B0B4007403E5 /* CodedVertex2d.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CodedVertex2d.hpp; sourceTree = "<group>"; };
 		5CC67CAF1CE2B811007403E5 /* ViewportWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ViewportWindow.cpp; sourceTree = "<group>"; };
 		5CC67CB01CE2B811007403E5 /* ViewportWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ViewportWindow.hpp; sourceTree = "<group>"; };
+		A0202D701D203C970035DD48 /* libGLEW.1.13.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.1.13.0.dylib; path = ../../../../../usr/local/Cellar/glew/1.13.0/lib/libGLEW.1.13.0.dylib; sourceTree = "<group>"; };
+		A0202D721D203CAF0035DD48 /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../../usr/local/Cellar/freeglut/2.8.1/lib/libglut.3.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +72,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B2BFFDF1CC3F6800037C1DE /* libglut.3.dylib in Frameworks */,
-				1B2BFFDD1CC3F6690037C1DE /* libGLEW.1.13.0.dylib in Frameworks */,
+				A0202D731D203CAF0035DD48 /* libglut.3.dylib in Frameworks */,
+				A0202D711D203C970035DD48 /* libGLEW.1.13.0.dylib in Frameworks */,
 				1B2BFFDB1CC3F6540037C1DE /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,8 +84,8 @@
 		1B2BFFBA1CC3F34A0037C1DE = {
 			isa = PBXGroup;
 			children = (
-				1B2BFFDE1CC3F6800037C1DE /* libglut.3.dylib */,
-				1B2BFFDC1CC3F6690037C1DE /* libGLEW.1.13.0.dylib */,
+				A0202D721D203CAF0035DD48 /* libglut.3.dylib */,
+				A0202D701D203C970035DD48 /* libGLEW.1.13.0.dylib */,
 				1B2BFFDA1CC3F6540037C1DE /* OpenGL.framework */,
 				1B2BFFC51CC3F34A0037C1DE /* CG_algorithms */,
 				1B2BFFC41CC3F34A0037C1DE /* Products */,
@@ -170,7 +171,7 @@
 			buildPhases = (
 				1B2BFFBF1CC3F34A0037C1DE /* Sources */,
 				1B2BFFC01CC3F34A0037C1DE /* Frameworks */,
-				1B2BFFC11CC3F34A0037C1DE /* CopyFiles */,
+				1B2BFFC11CC3F34A0037C1DE /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -319,12 +320,16 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					/opt/x11/include,
+					/opt/X11/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					/opt/x11/include,
+					/opt/X11/include,
+					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/freeglut/2.8.1/lib,
 				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-lGLUT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -334,12 +339,16 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					/opt/x11/include,
+					/opt/X11/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib,
-					/opt/x11/include,
+					/opt/X11/include,
+					/usr/local/Cellar/glew/1.13.0/lib,
+					/usr/local/Cellar/freeglut/2.8.1/lib,
 				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-lGLUT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

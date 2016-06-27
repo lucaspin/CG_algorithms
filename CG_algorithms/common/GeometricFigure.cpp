@@ -41,9 +41,9 @@ void GeometricFigure::addPoint(Vertex2d newPoint) {
  */
 void GeometricFigure::plotPoints() {
     glBegin(GL_POINTS);
-    glColor3f(1.0, 1.0, 1.0);
     
     for (Vertex2d point : this->getPoints()) {
+        glColor3f(point.getRed(), point.getGreen(), point.getBlue());
         glVertex3i(point.getX(), point.getY(), point.getZ() - 1);
     }
     

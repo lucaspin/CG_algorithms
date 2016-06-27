@@ -21,9 +21,16 @@ public:
     float getX() const;
     float getY() const;
     float getZ() const;
+    float getRed() const;
+    float getGreen() const;
+    float getBlue() const;
     void setX(float);
     void setY(float);
     void setZ(float);
+    void setRed(float);
+    void setGreen(float);
+    void setBlue(float);
+    void setRGBColors(float, float, float);
     bool operator<(const Vertex2d&) const;
     float magnitude() const;
     Vertex2d normalized() const;
@@ -32,6 +39,9 @@ private:
     float x;
     float y;
     float z;
+    float red;
+    float green;
+    float blue;
 };
 
 #endif /* Vertex2d_hpp */
