@@ -16,6 +16,8 @@
 
 using namespace std;
 
+Polygon::Polygon():GeometricFigure() {}
+
 /**
  * Constructor of the class
  * @param listOfVertices {list<Vertex2d>}
@@ -87,7 +89,7 @@ void Polygon::setVerticesList(list<Vertex2d> newListOfVertices) {
 Polygon Polygon::generateFilledPolygon(list<Vertex2d> vertices) {
     EdgesTable edgesTable(vertices);
     list<PolygonEdge> activeEdges;
-    Polygon polygon(vertices);
+    Polygon polygon(vertices, true);
     
     // Here, we get the colors from the first vertice in the list and set all the polygon points
     // to that color
@@ -162,7 +164,7 @@ Polygon Polygon::generateFilledPolygon(list<Vertex2d> vertices) {
  * @param vertices {list<Vertex2d>}
  */
 Polygon Polygon::generateNotFilledPolygon(list<Vertex2d> vertices) {
-    Polygon polygon(vertices);
+    Polygon polygon(vertices, false);
     
     Vertex2d initialVertice = *(vertices.begin());
     Vertex2d pointToAdd;
@@ -198,7 +200,12 @@ void Polygon::applyTransformationMatrix(Matrix2d transformationMatrix) {
     
     // Create a new polygon with the new vertices
     // TODO change this rendering method
-    Polygon newPolygon = Polygon::generateNotFilledPolygon(newVerticeList);
+    Polygon newPolygon;
+    if (this->isFilled()) {
+        newPolygon = Polygon::generateFilledPolygon(newVerticeList);
+    } else {
+        newPolygon = Polygon::generateNotFilledPolygon(newVerticeList);
+    }
     
     // Set the new properties
     this->setVerticesList(newVerticeList);

@@ -36,10 +36,14 @@ void printGeometricFigure(GeometricFigure figure);
 void viewportClipLineDemo();
 void viewportClipPolygonDemo();
 void transformationDemo();
+void timer(int value);
 
 // Define the window position on screen
 int window_x;
 int window_y;
+int angleToRotate = 0;
+int variationX = 0;
+float scaleVariation = 1.0;
 
 int main(int argc, char **argv) {
     
@@ -58,10 +62,29 @@ int main(int argc, char **argv) {
     // Set the callback functions
     glutDisplayFunc(onDisplay);
     
+    glutTimerFunc(30, timer, 1);
+    
     // Start glut event processing loop
     glutMainLoop();
     
     return 0;
+}
+
+void timer(int value) {
+    if (angleToRotate != 360) {
+        angleToRotate += 10;
+    } else {
+        angleToRotate = 10;
+    }
+    
+    if (variationX <= 740) {
+        variationX += 5;
+    } else {
+        variationX = 10;
+    }
+    
+    glutPostRedisplay();
+    glutTimerFunc(30, timer, 1);
 }
 
 void onDisplay() {
@@ -69,10 +92,13 @@ void onDisplay() {
     glClear(GL_COLOR_BUFFER_BIT);
     glOrtho(0.0, SCREEN_WIDTH, 0.0, SCREEN_HEIGHT, 0.0, 1.0);
     glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
     
-    viewportClipLineDemo();
+//    viewportClipLineDemo();
     viewportClipPolygonDemo();
-    //    transformationDemo();
+    
+    glPopMatrix();
     
     glFlush();
     glutSwapBuffers();
@@ -146,61 +172,68 @@ void viewportClipLineDemo() {
 
 void viewportClipPolygonDemo() {
     // Simulate the viewport borders
-    Vertex2d topLeft(300.0f, 200.0f);
-    Vertex2d topRight(400.0f, 200.0f);
-    Vertex2d bottomLeft(300.0f, 100.0f);
-    Vertex2d bottomRight(400.0f, 100.0f);
+    Vertex2d topLeft(-100, 200.0f);
+    topLeft.setRGBColors(0.4, 0.7, 0.2);
+    Vertex2d topRight(0.0f, 200.0f);
+    topRight.setRGBColors(0.4, 0.7, 0.2);
+    Vertex2d bottomLeft(-100.0f, 100.0f);
+    bottomLeft.setRGBColors(0.4, 0.7, 0.2);
+    Vertex2d bottomRight(0.0f, 100.0f);
+    bottomRight.setRGBColors(0.4, 0.7, 0.2);
     list<Vertex2d> listPolygonViewPort;
     listPolygonViewPort.push_back(topLeft);
     listPolygonViewPort.push_back(bottomLeft);
     listPolygonViewPort.push_back(bottomRight);
     listPolygonViewPort.push_back(topRight);
-    Polygon polygonViewPort = Polygon::generateNotFilledPolygon(listPolygonViewPort);
+    Polygon polygonViewPort = Polygon::generateFilledPolygon(listPolygonViewPort);
+    polygonViewPort.rotate(angleToRotate, -50.0, 150.0);
+    polygonViewPort.translate(variationX, 0.0);
     polygonViewPort.GeometricFigure::plotPoints();
     
     //translating the "ViewPort" just for simulating the before and after clipping
-    polygonViewPort.translate(0.0f, 150.0f);
-    polygonViewPort.GeometricFigure::plotPoints();
+//    polygonViewPort.translate(0.0f, 150.0f);
+//    polygonViewPort.GeometricFigure::plotPoints();
     
     // The ViewPort itslef
-    Vertex2d bottomLeftCorner(300.0f, 100.0f);
-    Vertex2d topRightCorner(400.0f, 200.0f);
-    ViewportWindow vpw(bottomLeftCorner, topRightCorner);
-
+//    Vertex2d bottomLeftCorner(300.0f, 100.0f);
+//    Vertex2d topRightCorner(400.0f, 200.0f);
+//    ViewportWindow vpw(bottomLeftCorner, topRightCorner);
+//
     // Draw some polygons
-    Vertex2d a(320.0f, 120.0f);
-    a.setRGBColors(0.7, 0.6, 0.8);
-    Vertex2d b(430.0f, 150.0f);
-    b.setRGBColors(0.7, 0.6, 0.8);
-    Vertex2d c(350.0f, 230.0f);
-    c.setRGBColors(0.7, 0.6, 0.8);
-    Vertex2d d(310.0f, 180.0f);
-    d.setRGBColors(0.7, 0.6, 0.8);
+//    Vertex2d a(320.0f, 120.0f);
+//    a.setRGBColors(0.7, 0.6, 0.8);
+//    Vertex2d b(430.0f, 150.0f);
+//    b.setRGBColors(0.7, 0.6, 0.8);
+//    Vertex2d c(350.0f, 230.0f);
+//    c.setRGBColors(0.7, 0.6, 0.8);
+//    Vertex2d d(310.0f, 180.0f);
+//    d.setRGBColors(0.7, 0.6, 0.8);
     
     // pushing in counter-clockwise orientation
-    list<Vertex2d> listPolygon1;
-    listPolygon1.push_back(a);
-    listPolygon1.push_back(b);
-    listPolygon1.push_back(c);
-    listPolygon1.push_back(d);
-    Polygon polygon1 = Polygon::generateFilledPolygon(listPolygon1);
+//    list<Vertex2d> listPolygon1;
+//    listPolygon1.push_back(a);
+//    listPolygon1.push_back(b);
+//    listPolygon1.push_back(c);
+//    listPolygon1.push_back(d);
+//    Polygon polygon1 = Polygon::generateFilledPolygon(listPolygon1);
+//    polygon1.rotate(angleToRotate, 300.0, 150.0);
 //    polygon1.GeometricFigure::plotPoints();
     
     // translating the polygon1 (test) for up and down
-    polygon1.translate(0.0f, 150.0f);
-    polygon1.GeometricFigure::plotPoints();
-    polygon1.translate(0.0f, -150.0f);
-    vpw.clipPolygon(polygon1);
-
-    std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
-    std::list<GeometricFigure*>::const_iterator it;
-    
-    // Iterating and Plotting all objects in Viewport
-    for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
-        Polygon *tempPolygon = static_cast<Polygon*>(*it);
-        Polygon newPolygon = Polygon::generateFilledPolygon(tempPolygon->getVerticesList());
-        newPolygon.GeometricFigure::plotPoints();
-    }
+//    polygon1.translate(0.0f, 150.0f);
+//    polygon1.GeometricFigure::plotPoints();
+//    polygon1.translate(0.0f, -150.0f);
+//    vpw.clipPolygon(polygon1);
+//
+//    std::list<GeometricFigure*> clippedObjects = vpw.getVisibleObjects();
+//    std::list<GeometricFigure*>::const_iterator it;
+//    
+//    // Iterating and Plotting all objects in Viewport
+//    for (it = clippedObjects.begin(); it != clippedObjects.end(); it++) {
+//        Polygon *tempPolygon = static_cast<Polygon*>(*it);
+//        Polygon newPolygon = Polygon::generateFilledPolygon(tempPolygon->getVerticesList());
+//        newPolygon.GeometricFigure::plotPoints();
+//    }
     
 }
 

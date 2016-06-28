@@ -16,6 +16,7 @@
 
 class Polygon : public GeometricFigure {
 public:
+    Polygon();
     Polygon(std::list<Vertex2d>, bool filled = false);
     Polygon(std::list<CodedVertex2d>, bool filled = false);
     bool isFilled() const;
