@@ -155,7 +155,9 @@ void ViewportWindow::clipLine(Line _line) {
     if (finalX < xMin) finalCodedPoint.setLeftRegionCode(true);
     
     bool actionTaken = false;
+    Vertex2d initialPoint = _line.getInitialPoint();
     Vertex2d newPoint;
+    newPoint.setRGBColors(initialPoint.getRed(), initialPoint.getGreen(), initialPoint.getBlue());
     
     while (!actionTaken) {
         if (clipLineAcceptanceTest(initialCodedPoint, finalCodedPoint)) {
@@ -277,6 +279,7 @@ void ViewportWindow::clipPolygon(Polygon _polygon) {
         float x = it->getX();
         float y = it->getY();
         CodedVertex2d codedPoint(x, y);
+        codedPoint.Vertex2d::setRGBColors(it->getRed(), it->getGreen(), it->getBlue());
         
         if (y > yMax) codedPoint.setTopRegionCode(true);
         if (y < yMin) codedPoint.setBottomRegionCode(true);
@@ -306,8 +309,10 @@ void ViewportWindow::clipPolygon(Polygon _polygon) {
             // If polygon's edge is not totally inside the viewport, we must calculate the intersect
             if (!this->isEdgeInsideLimitByIndex(*it, *nextVertice, counter)) {
                 CodedVertex2d newInitialVertice;
+                newInitialVertice.Vertex2d::setRGBColors(it->Vertex2d::getRed(), it->Vertex2d::getGreen(), it->Vertex2d::getGreen());
                 CodedVertex2d newFinalVertice;
-                    
+                newFinalVertice.Vertex2d::setRGBColors(it->Vertex2d::getRed(), it->Vertex2d::getGreen(), it->Vertex2d::getGreen());
+                
                 float x1 = 0.0, y1 = 0.0, m = 0.0;
                 float nextVerticeX = nextVertice->getX();
                 float nextVerticeY = nextVertice->getY();

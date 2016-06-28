@@ -84,11 +84,17 @@ void viewportClipLineDemo() {
     ViewportWindow vpw(bottomLeftCorner, topRightCorner);
     
     Vertex2d a(120.0f, 120.0f);
+    a.setRGBColors(0.4, 0.7, 0.2);
     Vertex2d b(150.0f, 150.0f);
+    b.setRGBColors(0.4, 0.7, 0.2);
     Vertex2d c(50.0f, 170.0f);
+    c.setRGBColors(0.4, 0.7, 0.2);
     Vertex2d d(140.0f, 250.0f);
+    d.setRGBColors(0.4, 0.7, 0.2);
     Vertex2d e(60.0f, 300.0f);
+    e.setRGBColors(0.4, 0.7, 0.2);
     Vertex2d f(250.0f, 190.0f);
+    f.setRGBColors(0.4, 0.7, 0.2);
     
     Line line1 = Line::generateLineDDA(a, b);    // all inside
     Line line2 = Line::generateLineDDA(c, e);    // all outside
@@ -163,9 +169,13 @@ void viewportClipPolygonDemo() {
 
     // Draw some polygons
     Vertex2d a(320.0f, 120.0f);
+    a.setRGBColors(0.7, 0.6, 0.8);
     Vertex2d b(430.0f, 150.0f);
+    b.setRGBColors(0.7, 0.6, 0.8);
     Vertex2d c(350.0f, 230.0f);
+    c.setRGBColors(0.7, 0.6, 0.8);
     Vertex2d d(310.0f, 180.0f);
+    d.setRGBColors(0.7, 0.6, 0.8);
     
     // pushing in counter-clockwise orientation
     list<Vertex2d> listPolygon1;

@@ -38,6 +38,7 @@ Polygon::Polygon(list<CodedVertex2d> listOfVertices, bool filled):GeometricFigur
     // Convert the list of CodedVertex2d to a list of Vertex2d
     for (auto it = listOfVertices.begin(); it != listOfVertices.end(); it++) {
         Vertex2d newVertex(it->getX(), it->getY());
+        newVertex.setRGBColors(it->Vertex2d::getRed(), it->Vertex2d::getGreen(), it->Vertex2d::getBlue());
         newVertices.push_back(newVertex);
     }
     
@@ -87,7 +88,12 @@ Polygon Polygon::generateFilledPolygon(list<Vertex2d> vertices) {
     EdgesTable edgesTable(vertices);
     list<PolygonEdge> activeEdges;
     Polygon polygon(vertices);
+    
+    // Here, we get the colors from the first vertice in the list and set all the polygon points
+    // to that color
+    Vertex2d firstPoint = *vertices.begin();
     Vertex2d pointToAdd;
+    pointToAdd.setRGBColors(firstPoint.getRed(), firstPoint.getGreen(), firstPoint.getBlue());
 
     // Get the smaller y from the list of polygon vertices
     int scanLineY = min_element(vertices.begin(), vertices.end())->getY();
@@ -157,7 +163,11 @@ Polygon Polygon::generateFilledPolygon(list<Vertex2d> vertices) {
  */
 Polygon Polygon::generateNotFilledPolygon(list<Vertex2d> vertices) {
     Polygon polygon(vertices);
+    
+    Vertex2d initialVertice = *(vertices.begin());
     Vertex2d pointToAdd;
+    pointToAdd.setRGBColors(initialVertice.getRed(), initialVertice.getGreen(), initialVertice.getBlue());
+    
     std::list<Vertex2d>::const_iterator it;
     
     for (it = vertices.begin(); it != vertices.end(); it++) {
@@ -182,6 +192,7 @@ void Polygon::applyTransformationMatrix(Matrix2d transformationMatrix) {
     // Generate the new vertices list
     for (Vertex2d vertice : this->getVerticesList()) {
         newVertice = transformationMatrix * vertice;
+        newVertice.setRGBColors(vertice.getRed(), vertice.getGreen(), vertice.getBlue());
         newVerticeList.push_back(newVertice);
     }
     

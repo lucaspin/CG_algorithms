@@ -102,6 +102,7 @@ Line Line::generateLineDDA(Vertex2d initialPoint, Vertex2d lastPoint) {
     
     Line line(initialPoint, lastPoint);
     Vertex2d pointToAdd;
+    pointToAdd.setRGBColors(initialPoint.getRed(), initialPoint.getGreen(), initialPoint.getBlue());
     
     xVariation = lastPoint.getX() - initialPoint.getX();
     yVariation = lastPoint.getY() - initialPoint.getY();
@@ -167,8 +168,11 @@ void Line::setInitialPoint(Vertex2d newInitialPoint) {
 }
 
 void Line::applyTransformationMatrix(Matrix2d transformationMatrix) {
+    Vertex2d oldInitialPoint = this->getInitialPoint();
+    
     // Calculate the new points
     Vertex2d newInitialPoint = transformationMatrix * this->getInitialPoint();
+    newInitialPoint.setRGBColors(oldInitialPoint.getRed(), oldInitialPoint.getGreen(), oldInitialPoint.getBlue());
     Vertex2d newFinalPoint = transformationMatrix * this->getFinalPoint();
     
     // Generate a new line

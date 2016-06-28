@@ -15,6 +15,7 @@ Vertex2d::Vertex2d() {
     this->setX(0.0f);
     this->setY(0.0f);
     this->setZ(1.0f);
+    this->setRGBColors(1.0, 1.0, 1.0);
 }
 
 /**
