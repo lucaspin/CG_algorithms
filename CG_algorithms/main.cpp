@@ -44,6 +44,7 @@ int window_y;
 int angleToRotate = 0;
 int variationX = 0;
 float scaleVariation = 1.0;
+bool isShrinking = true;
 
 int main(int argc, char **argv) {
     
@@ -83,8 +84,16 @@ void timer(int value) {
         variationX = 10;
     }
     
+    if (scaleVariation >= 0.5f && isShrinking) {
+        scaleVariation -= 0.01f;
+        if (scaleVariation <= 0.5f) {isShrinking = !isShrinking;}
+    } else {
+        scaleVariation += 0.01f;
+        if (scaleVariation >= 1.0f) {isShrinking = !isShrinking;}
+    }
+    
     glutPostRedisplay();
-    glutTimerFunc(30, timer, 1);
+    glutTimerFunc(20, timer, 1);
 }
 
 void onDisplay() {
@@ -189,6 +198,25 @@ void viewportClipPolygonDemo() {
     polygonViewPort.rotate(angleToRotate, -50.0, 150.0);
     polygonViewPort.translate(variationX, 0.0);
     polygonViewPort.GeometricFigure::plotPoints();
+    
+    Vertex2d topLeft2(-50, 250.0f);
+    topLeft2.setRGBColors(0.9, 0.7, 0.2);
+    Vertex2d topRight2(50.0f, 250.0f);
+    topRight2.setRGBColors(0.9, 0.7, 0.2);
+    Vertex2d bottomLeft2(-50.0f, 150.0f);
+    bottomLeft2.setRGBColors(0.9, 0.7, 0.2);
+    Vertex2d bottomRight2(50.0f, 150.0f);
+    bottomRight2.setRGBColors(0.9, 0.7, 0.2);
+    list<Vertex2d> listPolygonViewPort2;
+    listPolygonViewPort2.push_back(topLeft2);
+    listPolygonViewPort2.push_back(bottomLeft2);
+    listPolygonViewPort2.push_back(bottomRight2);
+    listPolygonViewPort2.push_back(topRight2);
+    Polygon polygonViewPort2 = Polygon::generateFilledPolygon(listPolygonViewPort2);
+    polygonViewPort2.rotate(angleToRotate, 0, 225.0);
+    polygonViewPort2.translate(variationX, 0.0);
+    polygonViewPort2.scale(scaleVariation, scaleVariation, 50, 150);
+    polygonViewPort2.GeometricFigure::plotPoints();
     
     //translating the "ViewPort" just for simulating the before and after clipping
 //    polygonViewPort.translate(0.0f, 150.0f);
