@@ -343,7 +343,7 @@ void viewportClipPolygonDemo() {
     heart3.scale(scaleVariation, scaleVariation, 50, 150);
     heart3.GeometricFigure::plotPoints();
     
-    // 4rd hearth
+    // 4rd heart
     Polygon heart4 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
     heart4.translate(800.0f, 50.0f);
     heart4.translate(-variationX, variationX);
@@ -351,13 +351,63 @@ void viewportClipPolygonDemo() {
     heart4.scale(scaleVariation, scaleVariation, 50, 150);
     heart4.GeometricFigure::plotPoints();
     
-    // 5th hearth
+    // 5th heart
     Polygon heart5 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
     heart5.translate(200.0f, 300.0f);
     heart5.translate(sin(variationX/10), 0);
     heart5.scale(1.4, 1.4, 0, 50);
     heart5.scale(scaleVariation, scaleVariation, 50, 150);
     heart5.GeometricFigure::plotPoints();
+    
+    // star mask
+    Vertex2d star1(40.0f, -40.0f);
+    star1.setRGBColors(0.9, 0.0, 0.9);
+    Vertex2d star2(23.0f, 3.0f);
+    Vertex2d star3(50.0f, 20.0f);
+    Vertex2d star4(15.0f, 20.0f);
+    Vertex2d star5(0.0f, 50.0f);
+    Vertex2d star6(-15.0f, 20.0f);
+    Vertex2d star7(-50.0f, 20.0f);
+    Vertex2d star8(-23.0f, 3.0f);
+    Vertex2d star9(-40.0f, -40.0f);
+    Vertex2d star10(0.0f, -10.0f);
+    
+    // Star pushing to a list
+    list<Vertex2d> listPolygonViewPortStar;
+    listPolygonViewPortStar.push_back(star1);
+    listPolygonViewPortStar.push_back(star2);
+    listPolygonViewPortStar.push_back(star3);
+    listPolygonViewPortStar.push_back(star4);
+    listPolygonViewPortStar.push_back(star5);
+    listPolygonViewPortStar.push_back(star6);
+    listPolygonViewPortStar.push_back(star7);
+    listPolygonViewPortStar.push_back(star8);
+    listPolygonViewPortStar.push_back(star9);
+    listPolygonViewPortStar.push_back(star10);
+    
+    // 1st star
+    Polygon starPolygon1 = Polygon::generateFilledPolygon(listPolygonViewPortStar);
+    starPolygon1.translate(200.0f, 300.0f);
+    starPolygon1.translate(variationX, 0);
+    starPolygon1.scale(1.0, 1.0, 0, 50);
+    starPolygon1.scale(scaleVariation, scaleVariation, 50, 150);
+    starPolygon1.GeometricFigure::plotPoints();
+    
+    // 2nd star
+    Polygon starPolygon2 = Polygon::generateFilledPolygon(listPolygonViewPortStar);
+    starPolygon2.translate(400.0f, 300.0f);
+    starPolygon2.translate(3*-variationX, 1.5-variationX);
+    starPolygon2.scale(0.6, 0.6, 0, 0);
+    starPolygon2.scale(-scaleVariation, -scaleVariation, 50, 150);
+    starPolygon2.GeometricFigure::plotPoints();
+    
+    // 3rd star
+    Polygon starPolygon3 = Polygon::generateFilledPolygon(listPolygonViewPortStar);
+    starPolygon3.translate(300.0f, 300.0f);
+    starPolygon3.translate(-0.5*variationX, -1.5f*variationX);
+    starPolygon3.scale(2.0, 2.0, 0, 50);
+    starPolygon3.scale(+scaleVariation, +scaleVariation, 50, 150);
+    starPolygon3.GeometricFigure::plotPoints();
     
     //translating the "ViewPort" just for simulating the before and after clipping
 //    polygonViewPort.translate(0.0f, 150.0f);
