@@ -218,6 +218,147 @@ void viewportClipPolygonDemo() {
     polygonViewPort2.scale(scaleVariation, scaleVariation, 50, 150);
     polygonViewPort2.GeometricFigure::plotPoints();
     
+    // heart mask S2 =)
+    Vertex2d vertex1(0.0f, 0.0f);
+    vertex1.setRGBColors(0.9, 0.0, 0.0);
+    Vertex2d vertex2(10.0f, 0.0f);
+    Vertex2d vertex3(10.0f, 10.0f);
+    Vertex2d vertex4(20.0f, 10.0f);
+    Vertex2d vertex5(20.0f, 20.0f);
+    Vertex2d vertex6(30.0f, 20.0f);
+    Vertex2d vertex7(30.0f, 30.0f);
+    Vertex2d vertex8(40.0f, 30.0f);
+    Vertex2d vertex9(40.0f, 40.0f);
+    Vertex2d vertex10(50.0f, 40.0f);
+    Vertex2d vertex11(50.0f, 50.0f);
+    Vertex2d vertex12(60.0f, 50.0f);
+    Vertex2d vertex13(60.0f, 60.0f);
+    Vertex2d vertex14(70.0f, 60.0f);
+    Vertex2d vertex15(70.0f, 80.0f);
+    Vertex2d vertex16(60.0f, 80.0f);
+    Vertex2d vertex17(60.0f, 90.0f);
+    Vertex2d vertex18(50.0f, 90.0f);
+    Vertex2d vertex19(50.0f, 100.0f);
+    Vertex2d vertex20(30.0f, 100.0f);
+    Vertex2d vertex21(30.0f, 90.0f);
+    Vertex2d vertex22(20.0f, 90.0f);
+    Vertex2d vertex23(20.0f, 80.0f);
+    Vertex2d vertex24(10.0f, 80.0f);
+    Vertex2d vertex25(10.0f, 70.0f);
+    Vertex2d vertex26(0.0f, 70.0f);
+    Vertex2d vertex27(0.0f, 80.0f);
+    Vertex2d vertex28(-10.0f, 80.0f);
+    Vertex2d vertex29(-10.0f, 90.0f);
+    Vertex2d vertex30(-20.0f, 90.0f);
+    Vertex2d vertex31(-20.0f, 100.0f);
+    Vertex2d vertex32(-40.0f, 100.0f);
+    Vertex2d vertex33(-40.0f, 90.0f);
+    Vertex2d vertex34(-50.0f, 90.0f);
+    Vertex2d vertex35(-50.0f, 80.0f);
+    Vertex2d vertex36(-60.0f, 80.0f);
+    Vertex2d vertex37(-60.0f, 60.0f);
+    Vertex2d vertex38(-50.0f, 60.0f);
+    Vertex2d vertex39(-50.0f, 50.0f);
+    Vertex2d vertex40(-40.0f, 50.0f);
+    Vertex2d vertex41(-40.0f, 40.0f);
+    Vertex2d vertex42(-30.0f, 40.0f);
+    Vertex2d vertex43(-30.0f, 30.0f);
+    Vertex2d vertex44(-20.0f, 30.0f);
+    Vertex2d vertex45(-20.0f, 20.0f);
+    Vertex2d vertex46(-10.0f, 20.0f);
+    Vertex2d vertex47(-10.0f, 10.0f);
+    Vertex2d vertex48(0.0f, 10.0f);
+
+    
+    // pushing the heart's vertices to a list
+    list<Vertex2d> listPolygonViewPortHeart;
+    listPolygonViewPortHeart.push_back(vertex1);
+    listPolygonViewPortHeart.push_back(vertex2);
+    listPolygonViewPortHeart.push_back(vertex3);
+    listPolygonViewPortHeart.push_back(vertex4);
+    listPolygonViewPortHeart.push_back(vertex5);
+    listPolygonViewPortHeart.push_back(vertex6);
+    listPolygonViewPortHeart.push_back(vertex7);
+    listPolygonViewPortHeart.push_back(vertex8);
+    listPolygonViewPortHeart.push_back(vertex9);
+    listPolygonViewPortHeart.push_back(vertex10);
+    listPolygonViewPortHeart.push_back(vertex11);
+    listPolygonViewPortHeart.push_back(vertex12);
+    listPolygonViewPortHeart.push_back(vertex13);
+    listPolygonViewPortHeart.push_back(vertex14);
+    listPolygonViewPortHeart.push_back(vertex15);
+    listPolygonViewPortHeart.push_back(vertex16);
+    listPolygonViewPortHeart.push_back(vertex17);
+    listPolygonViewPortHeart.push_back(vertex18);
+    listPolygonViewPortHeart.push_back(vertex19);
+    listPolygonViewPortHeart.push_back(vertex20);
+    listPolygonViewPortHeart.push_back(vertex21);
+    listPolygonViewPortHeart.push_back(vertex22);
+    listPolygonViewPortHeart.push_back(vertex23);
+    listPolygonViewPortHeart.push_back(vertex24);
+    listPolygonViewPortHeart.push_back(vertex25);
+    listPolygonViewPortHeart.push_back(vertex26);
+    listPolygonViewPortHeart.push_back(vertex27);
+    listPolygonViewPortHeart.push_back(vertex28);
+    listPolygonViewPortHeart.push_back(vertex29);
+    listPolygonViewPortHeart.push_back(vertex30);
+    listPolygonViewPortHeart.push_back(vertex31);
+    listPolygonViewPortHeart.push_back(vertex32);
+    listPolygonViewPortHeart.push_back(vertex33);
+    listPolygonViewPortHeart.push_back(vertex34);
+    listPolygonViewPortHeart.push_back(vertex35);
+    listPolygonViewPortHeart.push_back(vertex36);
+    listPolygonViewPortHeart.push_back(vertex37);
+    listPolygonViewPortHeart.push_back(vertex38);
+    listPolygonViewPortHeart.push_back(vertex39);
+    listPolygonViewPortHeart.push_back(vertex40);
+    listPolygonViewPortHeart.push_back(vertex41);
+    listPolygonViewPortHeart.push_back(vertex42);
+    listPolygonViewPortHeart.push_back(vertex43);
+    listPolygonViewPortHeart.push_back(vertex44);
+    listPolygonViewPortHeart.push_back(vertex45);
+    listPolygonViewPortHeart.push_back(vertex46);
+    listPolygonViewPortHeart.push_back(vertex47);
+    listPolygonViewPortHeart.push_back(vertex48);
+
+    // 1st heart
+    Polygon heart = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
+    heart.translate(variationX, 0.0);
+    heart.scale(scaleVariation, scaleVariation, 50, 150);
+    heart.GeometricFigure::plotPoints();
+
+    // 2nd hearth
+    Polygon heart2 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
+    heart2.translate(50.0f, 50.0f);
+    heart2.translate(variationX, variationX);
+    heart2.scale(1.3, 1.3, 0, 50);
+    heart2.scale(scaleVariation, scaleVariation, 50, 150);
+    heart2.GeometricFigure::plotPoints();
+    
+    // 3rd heart
+    Polygon heart3 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
+    heart3.translate(800.0f, 600.0f);
+    heart3.translate(-variationX, -variationX);
+    heart3.scale(1.1, 1.1, 0, 50);
+    heart3.scale(scaleVariation, scaleVariation, 50, 150);
+    heart3.GeometricFigure::plotPoints();
+    
+    // 4rd hearth
+    Polygon heart4 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
+    heart4.translate(800.0f, 50.0f);
+    heart4.translate(-variationX, variationX);
+    heart4.scale(0.6, 0.6, 0, 50);
+    heart4.scale(scaleVariation, scaleVariation, 50, 150);
+    heart4.GeometricFigure::plotPoints();
+    
+    // 5th hearth
+    Polygon heart5 = Polygon::generateFilledPolygon(listPolygonViewPortHeart);
+    heart5.translate(200.0f, 300.0f);
+    heart5.translate(sin(variationX/10), 0);
+    heart5.scale(1.4, 1.4, 0, 50);
+    heart5.scale(scaleVariation, scaleVariation, 50, 150);
+    heart5.GeometricFigure::plotPoints();
+    
     //translating the "ViewPort" just for simulating the before and after clipping
 //    polygonViewPort.translate(0.0f, 150.0f);
 //    polygonViewPort.GeometricFigure::plotPoints();
