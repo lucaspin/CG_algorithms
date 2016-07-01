@@ -12,12 +12,8 @@ The current algorithms present here are:
   - clipLine - Cohen-Sutherland algorithm
   - clipPolygon - Hodgman-Sutherland algorithm
 
-## TODO
-
-- [ ] Implement function for mirroring
-- [ ] review the ViewportWindow class (specially clip method)
-- [ ] review bugs in Bresenham algorithm
-- [ ] Implement 3D basic structures
+This is our release version, in order to present to the Professor Denis Salvadeo.
+We included some animation to demonstrate this Graphic Engine!
 
 ## Authors
 
