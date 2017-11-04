@@ -1,6 +1,9 @@
 # CG Algorithms
 
-This is a wrapper for all the Computer Graphics algorithms of the Computer Graphics class on University of São Paulo (UNESP).
+This is our "mini Graphic Framework" that we build (in openGL) for the CG discipline Sao Paulo State University (UNESP).
+
+![Final Animation](./screenshots/cg_algorithms.gif)
+*An Animation showing all algorithms together*vvvvv
 
 The current algorithms present here are:
 
@@ -13,9 +16,19 @@ The current algorithms present here are:
   - clipPolygon - Hodgman-Sutherland algorithm
 
 This is our release version, in order to present to the Professor Denis Salvadeo.
-We included some animation to demonstrate this Graphic Engine!
+
+## Screenshots
+
+![Some Polygons](./screenshots/somePolygons.png)
+*Some nice polygons*
+
+![Clipping Lines and Polygon](./screenshots/clipLinePolygon.png)
+*ClipLine and ClipPolygon in action*
+
+![Project Structure](./screenshots/projectStructure.png)
+*Our project structure*
 
 ## Authors
 
-Lucas Pinheiro @lucaspin<br>
+Lucas Pinheiro @lucaspin  
 Dalton Lima @daltonbr
