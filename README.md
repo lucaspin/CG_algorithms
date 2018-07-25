@@ -1,6 +1,6 @@
 # CG Algorithms
 
-This is our "mini Graphic Framework" that we build (in openGL) for the CG discipline Sao Paulo State University (UNESP).
+This is our "mini Graphics Framework" that we build (in openGL) for the CG discipline Sao Paulo State University (UNESP).
 
 ![Final Animation](./screenshots/cg_algorithms.gif)  
 *An Animation showing all algorithms together*
